@@ -1,0 +1,11 @@
+.env
+.env.local
+.env.production
+node_modules/
+.next/
+*.log
+pgdata/
+__pycache__/
+*.pyc
+.venv/
+dist/
