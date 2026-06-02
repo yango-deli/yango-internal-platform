@@ -1,12 +1,13 @@
-import { getServerSession } from "next-auth";
+import { getServerSession, Session } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { Role } from "@prisma/client";
 
-function requireAdmin(session: Awaited<ReturnType<typeof getServerSession>>) {
+function requireAdmin(session: Session | null) {
   if (!session?.user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  if (session.user.role !== Role.admin) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if ((session.user as any).role !== Role.admin) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   return null;
 }
 
