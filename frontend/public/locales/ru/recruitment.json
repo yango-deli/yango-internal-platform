@@ -1,0 +1,180 @@
+{
+  "nav": {
+    "recruitment": "Рекрутинг",
+    "import": "Импорт",
+    "stats": "Статистика"
+  },
+  "stages": {
+    "new": "Новый",
+    "contacted": "Связались",
+    "screening": "Скрининг",
+    "interview_scheduled": "Собеседование запланировано",
+    "interview_done": "Собеседование проведено",
+    "offer_sent": "Предложение отправлено",
+    "hired": "Принят",
+    "rejected": "Отклонён",
+    "irrelevant": "Нерелевантный",
+    "on_hold": "В ожидании"
+  },
+  "workerTypes": {
+    "courier": "Курьер",
+    "store": "Магазин",
+    "office": "Офис"
+  },
+  "sources": {
+    "website": "Форма сайта",
+    "facebook": "Форма Facebook",
+    "manual": "Вручную",
+    "referral": "Рекомендация"
+  },
+  "page": {
+    "title": "Рекрутинг",
+    "empty": "Кандидатов пока нет",
+    "emptyDescription": "Добавьте кандидатов вручную или импортируйте из файла",
+    "addCandidate": "Добавить кандидата",
+    "import": "Импорт",
+    "stats": "Статистика",
+    "viewKanban": "Канбан",
+    "viewTable": "Таблица",
+    "filters": "Фильтры",
+    "clearFilters": "Сбросить фильтры",
+    "allSources": "Все источники",
+    "allWorkerTypes": "Все типы работников",
+    "allRecruiters": "Все рекрутеры",
+    "dateFrom": "С даты",
+    "dateTo": "По дату",
+    "search": "Поиск по имени или телефону..."
+  },
+  "card": {
+    "duplicate": "Дубликат",
+    "ago": "{{time}} назад"
+  },
+  "table": {
+    "name": "Имя",
+    "phone": "Телефон",
+    "email": "Email",
+    "source": "Источник",
+    "workerType": "Тип работника",
+    "stage": "Стадия",
+    "city": "Город",
+    "assignedTo": "Назначен",
+    "createdAt": "Создан",
+    "actions": "Действия",
+    "bulkAssign": "Назначить рекрутера",
+    "bulkStage": "Изменить стадию",
+    "bulkArchive": "Архивировать",
+    "selected": "Выбрано: {{count}}"
+  },
+  "form": {
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "phone": "Телефон",
+    "email": "Email",
+    "idNumber": "Номер удостоверения",
+    "source": "Источник",
+    "sourceDetail": "Детали источника",
+    "workerType": "Тип работника",
+    "city": "Город",
+    "vehicleType": "Тип транспорта",
+    "position": "Должность",
+    "tags": "Теги",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "create": "Создать кандидата",
+    "edit": "Редактировать"
+  },
+  "panel": {
+    "overview": "Обзор",
+    "activity": "Активность",
+    "notes": "Заметки",
+    "stageHistory": "История стадий",
+    "convertToWorker": "Преобразовать в работника",
+    "duplicateBanner": "Этот кандидат является дубликатом другой записи",
+    "addNote": "Добавить заметку...",
+    "pin": "Закрепить",
+    "unpin": "Открепить",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "noNotes": "Заметок пока нет",
+    "noActivity": "Активности пока нет",
+    "fromStage": "Из",
+    "toStage": "В",
+    "changedBy": "Изменил",
+    "reason": "Причина",
+    "date": "Дата"
+  },
+  "modal": {
+    "stageReasonTitle": "Причина смены стадии",
+    "stageReasonPlaceholder": "Введите причину...",
+    "confirm": "Подтвердить",
+    "duplicateWarningTitle": "Возможный дубликат",
+    "duplicateWarningBody": "Кандидат с совпадающими контактами уже существует.",
+    "overrideDuplicate": "Импортировать всё равно",
+    "deleteTitle": "Удалить кандидата?",
+    "deleteBody": "Это действие нельзя отменить.",
+    "convertTitle": "Преобразовать в работника",
+    "convertBody": "Создать запись работника из этого кандидата?"
+  },
+  "import": {
+    "title": "Импорт кандидатов",
+    "dropzone": "Перетащите CSV или Excel файл сюда",
+    "dropzoneActive": "Отпустите файл здесь...",
+    "browse": "или нажмите для выбора",
+    "stepUpload": "Загрузка",
+    "stepMap": "Сопоставление колонок",
+    "stepPreview": "Предпросмотр",
+    "stepResults": "Результаты",
+    "mapInstructions": "Сопоставьте колонки файла с полями кандидата",
+    "fileColumn": "Колонка файла",
+    "candidateField": "Поле кандидата",
+    "previewTitle": "Предпросмотр (первые 10 строк)",
+    "importButton": "Импортировать {{count}} кандидатов",
+    "resultsImported": "Импортировано: {{count}}",
+    "resultsDuplicates": "Пропущено дубликатов: {{count}}",
+    "resultsErrors": "Ошибок: {{count}}",
+    "back": "Назад",
+    "next": "Далее"
+  },
+  "stats": {
+    "title": "Статистика рекрутинга",
+    "funnel": "Воронка кандидатов",
+    "leadsBySource": "Лиды по источникам (еженедельно)",
+    "conversion": "Конверсия по источникам",
+    "recruiterPerformance": "Эффективность рекрутеров",
+    "candidates": "Кандидаты",
+    "hired": "Принято",
+    "conversionRate": "Конверсия %",
+    "recruiter": "Рекрутер"
+  },
+  "activity": {
+    "imported": "Кандидат импортирован",
+    "duplicate_detected": "Обнаружен дубликат при импорте",
+    "stage_changed": "Стадия изменена с {{from}} на {{to}}",
+    "note_added": "Заметка добавлена",
+    "assigned": "Назначен {{name}}",
+    "created": "Кандидат создан",
+    "updated": "Кандидат обновлён",
+    "duplicate_irrelevant": "Автоматически помечен нерелевантным (предыдущий дубликат)",
+    "duplicate_hired": "Помечен как дубликат принятого работника"
+  },
+  "toast": {
+    "saved": "Сохранено",
+    "created": "Кандидат создан",
+    "deleted": "Кандидат удалён",
+    "imported": "Импорт завершён",
+    "stageChanged": "Стадия обновлена",
+    "error": "Что-то пошло не так"
+  },
+  "errors": {
+    "missing_required_fields": "Отсутствуют обязательные поля",
+    "import_failed": "Ошибка импорта",
+    "unauthorized": "Не авторизован",
+    "forbidden": "Запрещено"
+  },
+  "time": {
+    "justNow": "только что",
+    "minutes": "{{count}} мин",
+    "hours": "{{count}} ч",
+    "days": "{{count}} дн"
+  }
+}

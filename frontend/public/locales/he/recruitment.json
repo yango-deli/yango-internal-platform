@@ -1,0 +1,180 @@
+{
+  "nav": {
+    "recruitment": "גיוס",
+    "import": "ייבוא",
+    "stats": "סטטיסטיקה"
+  },
+  "stages": {
+    "new": "חדש",
+    "contacted": "יצירת קשר",
+    "screening": "סינון",
+    "interview_scheduled": "ראיון מתוכנן",
+    "interview_done": "ראיון בוצע",
+    "offer_sent": "הצעה נשלחה",
+    "hired": "התקבל",
+    "rejected": "נדחה",
+    "irrelevant": "לא רלוונטי",
+    "on_hold": "בהמתנה"
+  },
+  "workerTypes": {
+    "courier": "שליח",
+    "store": "חנות",
+    "office": "משרד"
+  },
+  "sources": {
+    "website": "טופס אתר",
+    "facebook": "טופס פייסבוק",
+    "manual": "ידני",
+    "referral": "הפניה"
+  },
+  "page": {
+    "title": "גיוס",
+    "empty": "אין מועמדים עדיין",
+    "emptyDescription": "הוסף מועמדים ידנית או ייבא מקובץ",
+    "addCandidate": "הוסף מועמד",
+    "import": "ייבוא",
+    "stats": "סטטיסטיקה",
+    "viewKanban": "קנבן",
+    "viewTable": "טבלה",
+    "filters": "סינון",
+    "clearFilters": "נקה סינון",
+    "allSources": "כל המקורות",
+    "allWorkerTypes": "כל סוגי העובדים",
+    "allRecruiters": "כל המגייסים",
+    "dateFrom": "מתאריך",
+    "dateTo": "עד תאריך",
+    "search": "חיפוש לפי שם או טלפון..."
+  },
+  "card": {
+    "duplicate": "כפול",
+    "ago": "לפני {{time}}"
+  },
+  "table": {
+    "name": "שם",
+    "phone": "טלפון",
+    "email": "אימייל",
+    "source": "מקור",
+    "workerType": "סוג עובד",
+    "stage": "שלב",
+    "city": "עיר",
+    "assignedTo": "מוקצה ל",
+    "createdAt": "נוצר",
+    "actions": "פעולות",
+    "bulkAssign": "הקצה מגייס",
+    "bulkStage": "שנה שלב",
+    "bulkArchive": "ארכיון",
+    "selected": "{{count}} נבחרו"
+  },
+  "form": {
+    "firstName": "שם פרטי",
+    "lastName": "שם משפחה",
+    "phone": "טלפון",
+    "email": "אימייל",
+    "idNumber": "תעודת זהות",
+    "source": "מקור",
+    "sourceDetail": "פירוט מקור",
+    "workerType": "סוג עובד",
+    "city": "עיר",
+    "vehicleType": "סוג רכב",
+    "position": "משרה",
+    "tags": "תגיות",
+    "save": "שמור",
+    "cancel": "ביטול",
+    "create": "צור מועמד",
+    "edit": "ערוך"
+  },
+  "panel": {
+    "overview": "סקירה",
+    "activity": "פעילות",
+    "notes": "הערות",
+    "stageHistory": "היסטוריית שלבים",
+    "convertToWorker": "המר לעובד",
+    "duplicateBanner": "מועמד זה הוא כפילות של רשומה אחרת",
+    "addNote": "הוסף הערה...",
+    "pin": "נעץ",
+    "unpin": "בטל נעיצה",
+    "edit": "ערוך",
+    "delete": "מחק",
+    "noNotes": "אין הערות עדיין",
+    "noActivity": "אין פעילות עדיין",
+    "fromStage": "מ",
+    "toStage": "ל",
+    "changedBy": "שונה על ידי",
+    "reason": "סיבה",
+    "date": "תאריך"
+  },
+  "modal": {
+    "stageReasonTitle": "סיבה לשינוי שלב",
+    "stageReasonPlaceholder": "הזן סיבה...",
+    "confirm": "אישור",
+    "duplicateWarningTitle": "כפילות אפשרית",
+    "duplicateWarningBody": "מועמד עם פרטי קשר תואמים כבר קיים.",
+    "overrideDuplicate": "ייבא בכל זאת",
+    "deleteTitle": "למחוק מועמד?",
+    "deleteBody": "פעולה זו לא ניתנת לביטול.",
+    "convertTitle": "המר לעובד",
+    "convertBody": "ליצור רשומת עובד ממועמד זה?"
+  },
+  "import": {
+    "title": "ייבוא מועמדים",
+    "dropzone": "גרור ושחרר קובץ CSV או Excel כאן",
+    "dropzoneActive": "שחרר קובץ כאן...",
+    "browse": "או לחץ לעיון",
+    "stepUpload": "העלאה",
+    "stepMap": "מיפוי עמודות",
+    "stepPreview": "תצוגה מקדימה",
+    "stepResults": "תוצאות",
+    "mapInstructions": "מפה את עמודות הקובץ לשדות מועמד",
+    "fileColumn": "עמודת קובץ",
+    "candidateField": "שדה מועמד",
+    "previewTitle": "תצוגה מקדימה (10 שורות ראשונות)",
+    "importButton": "ייבא {{count}} מועמדים",
+    "resultsImported": "{{count}} יובאו",
+    "resultsDuplicates": "{{count}} כפילויות דולגו",
+    "resultsErrors": "{{count}} שגיאות",
+    "back": "חזור",
+    "next": "הבא"
+  },
+  "stats": {
+    "title": "סטטיסטיקת גיוס",
+    "funnel": "משפך מועמדים",
+    "leadsBySource": "לידים לפי מקור (שבועי)",
+    "conversion": "שיעור המרה לפי מקור",
+    "recruiterPerformance": "ביצועי מגייסים",
+    "candidates": "מועמדים",
+    "hired": "התקבלו",
+    "conversionRate": "המרה %",
+    "recruiter": "מגייס"
+  },
+  "activity": {
+    "imported": "מועמד יובא",
+    "duplicate_detected": "כפילות זוהתה בייבוא",
+    "stage_changed": "שלב שונה מ-{{from}} ל-{{to}}",
+    "note_added": "הערה נוספה",
+    "assigned": "הוקצה ל-{{name}}",
+    "created": "מועמד נוצר",
+    "updated": "מועמד עודכן",
+    "duplicate_irrelevant": "סומן אוטומטית כלא רלוונטי (כפילות קודמת)",
+    "duplicate_hired": "סומן ככפילות של עובד שהתקבל"
+  },
+  "toast": {
+    "saved": "נשמר בהצלחה",
+    "created": "מועמד נוצר",
+    "deleted": "מועמד נמחק",
+    "imported": "ייבוא הושלם",
+    "stageChanged": "שלב עודכן",
+    "error": "משהו השתבש"
+  },
+  "errors": {
+    "missing_required_fields": "שדות חובה חסרים",
+    "import_failed": "ייבוא נכשל",
+    "unauthorized": "לא מורשה",
+    "forbidden": "אסור"
+  },
+  "time": {
+    "justNow": "עכשיו",
+    "minutes": "{{count}} דק'",
+    "hours": "{{count}} שע'",
+    "days": "{{count}} ימים"
+  }
+}

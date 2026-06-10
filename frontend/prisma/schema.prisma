@@ -57,6 +57,10 @@ model User {
   shortcuts         UserShortcut[]
   widgetConfigs     UserWidgetConfig[]
   announcements     CompanyAnnouncement[]  // authored announcements
+  assignedCandidates Candidate[]           @relation("CandidateAssignee")
+  candidateStageChanges CandidateStageHistory[]
+  candidateNotes    CandidateNote[]
+  candidateActivities CandidateActivity[]
   createdAt         DateTime               @default(now())
   updatedAt         DateTime               @updatedAt
 }
@@ -137,4 +141,79 @@ model CompanyAnnouncement {
   expiresAt   DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+model RecruitmentPosition {
+  id          String      @id @default(cuid())
+  title       String
+  department  String?
+  description String?     @db.Text
+  isActive    Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  candidates  Candidate[]
+}
+
+model Candidate {
+  id            String   @id @default(cuid())
+  firstName     String
+  lastName      String
+  phone         String
+  email         String?
+  idNumber      String?
+  source        String
+  sourceDetail  String?
+  positionId    String?
+  position      RecruitmentPosition? @relation(fields: [positionId], references: [id])
+  workerType    String?
+  city          String?
+  vehicleType   String?
+  stage         String   @default("new")
+  stageHistory  CandidateStageHistory[]
+  isDuplicate   Boolean  @default(false)
+  duplicateOfId String?
+  assignedToId  String?
+  assignedTo    User?    @relation("CandidateAssignee", fields: [assignedToId], references: [id])
+  notes         CandidateNote[]
+  activities    CandidateActivity[]
+  formData      Json?
+  tags          String[]
+  isArchived    Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model CandidateStageHistory {
+  id          String    @id @default(cuid())
+  candidateId String
+  candidate   Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  fromStage   String
+  toStage     String
+  changedById String
+  changedBy   User      @relation(fields: [changedById], references: [id])
+  reason      String?
+  createdAt   DateTime  @default(now())
+}
+
+model CandidateNote {
+  id          String    @id @default(cuid())
+  candidateId String
+  candidate   Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  authorId    String
+  author      User      @relation(fields: [authorId], references: [id])
+  content     String    @db.Text
+  isPinned    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model CandidateActivity {
+  id          String    @id @default(cuid())
+  candidateId String
+  candidate   Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  type        String
+  description String
+  metadata    Json?
+  createdAt   DateTime  @default(now())
 }

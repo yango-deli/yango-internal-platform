@@ -8,6 +8,9 @@ import { cn } from "@/lib/utils";
 
 function getTitleFromPath(pathname: string): string {
   if (pathname.startsWith("/simulation")) return "Simulation Tool";
+  if (pathname.startsWith("/recruitment/import")) return "Recruitment Import";
+  if (pathname.startsWith("/recruitment/stats")) return "Recruitment Statistics";
+  if (pathname.startsWith("/recruitment")) return "Recruitment";
   if (pathname.startsWith("/users")) return "User Management";
   return "Dashboard";
 }

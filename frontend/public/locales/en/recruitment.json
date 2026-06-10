@@ -1,0 +1,180 @@
+{
+  "nav": {
+    "recruitment": "Recruitment",
+    "import": "Import",
+    "stats": "Statistics"
+  },
+  "stages": {
+    "new": "New",
+    "contacted": "Contacted",
+    "screening": "Screening",
+    "interview_scheduled": "Interview Scheduled",
+    "interview_done": "Interview Done",
+    "offer_sent": "Offer Sent",
+    "hired": "Hired",
+    "rejected": "Rejected",
+    "irrelevant": "Irrelevant",
+    "on_hold": "On Hold"
+  },
+  "workerTypes": {
+    "courier": "Courier",
+    "store": "Store",
+    "office": "Office"
+  },
+  "sources": {
+    "website": "Website Form",
+    "facebook": "Facebook Form",
+    "manual": "Manual",
+    "referral": "Referral"
+  },
+  "page": {
+    "title": "Recruitment",
+    "empty": "No candidates yet",
+    "emptyDescription": "Add candidates manually or import from a file",
+    "addCandidate": "Add Candidate",
+    "import": "Import",
+    "stats": "Statistics",
+    "viewKanban": "Kanban",
+    "viewTable": "Table",
+    "filters": "Filters",
+    "clearFilters": "Clear filters",
+    "allSources": "All sources",
+    "allWorkerTypes": "All worker types",
+    "allRecruiters": "All recruiters",
+    "dateFrom": "From date",
+    "dateTo": "To date",
+    "search": "Search by name or phone..."
+  },
+  "card": {
+    "duplicate": "Duplicate",
+    "ago": "{{time}} ago"
+  },
+  "table": {
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "source": "Source",
+    "workerType": "Worker Type",
+    "stage": "Stage",
+    "city": "City",
+    "assignedTo": "Assigned To",
+    "createdAt": "Created",
+    "actions": "Actions",
+    "bulkAssign": "Assign recruiter",
+    "bulkStage": "Change stage",
+    "bulkArchive": "Archive",
+    "selected": "{{count}} selected"
+  },
+  "form": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Phone",
+    "email": "Email",
+    "idNumber": "ID Number",
+    "source": "Source",
+    "sourceDetail": "Source Detail",
+    "workerType": "Worker Type",
+    "city": "City",
+    "vehicleType": "Vehicle Type",
+    "position": "Position",
+    "tags": "Tags",
+    "save": "Save",
+    "cancel": "Cancel",
+    "create": "Create Candidate",
+    "edit": "Edit"
+  },
+  "panel": {
+    "overview": "Overview",
+    "activity": "Activity",
+    "notes": "Notes",
+    "stageHistory": "Stage History",
+    "convertToWorker": "Convert to Worker",
+    "duplicateBanner": "This candidate is a duplicate of another record",
+    "addNote": "Add a note...",
+    "pin": "Pin",
+    "unpin": "Unpin",
+    "edit": "Edit",
+    "delete": "Delete",
+    "noNotes": "No notes yet",
+    "noActivity": "No activity yet",
+    "fromStage": "From",
+    "toStage": "To",
+    "changedBy": "Changed By",
+    "reason": "Reason",
+    "date": "Date"
+  },
+  "modal": {
+    "stageReasonTitle": "Reason for stage change",
+    "stageReasonPlaceholder": "Enter reason...",
+    "confirm": "Confirm",
+    "duplicateWarningTitle": "Possible duplicate",
+    "duplicateWarningBody": "A candidate with matching contact details already exists.",
+    "overrideDuplicate": "Import anyway",
+    "deleteTitle": "Delete candidate?",
+    "deleteBody": "This action cannot be undone.",
+    "convertTitle": "Convert to Worker",
+    "convertBody": "Create a worker record from this hired candidate?"
+  },
+  "import": {
+    "title": "Import Candidates",
+    "dropzone": "Drag & drop CSV or Excel file here",
+    "dropzoneActive": "Drop file here...",
+    "browse": "or click to browse",
+    "stepUpload": "Upload",
+    "stepMap": "Map Columns",
+    "stepPreview": "Preview",
+    "stepResults": "Results",
+    "mapInstructions": "Map your file columns to candidate fields",
+    "fileColumn": "File Column",
+    "candidateField": "Candidate Field",
+    "previewTitle": "Preview (first 10 rows)",
+    "importButton": "Import {{count}} candidates",
+    "resultsImported": "{{count}} imported",
+    "resultsDuplicates": "{{count}} duplicates skipped",
+    "resultsErrors": "{{count}} errors",
+    "back": "Back",
+    "next": "Next"
+  },
+  "stats": {
+    "title": "Recruitment Statistics",
+    "funnel": "Candidate Funnel",
+    "leadsBySource": "Leads per Source (Weekly)",
+    "conversion": "Conversion Rate by Source",
+    "recruiterPerformance": "Recruiter Performance",
+    "candidates": "Candidates",
+    "hired": "Hired",
+    "conversionRate": "Conversion %",
+    "recruiter": "Recruiter"
+  },
+  "activity": {
+    "imported": "Candidate imported",
+    "duplicate_detected": "Duplicate detected during import",
+    "stage_changed": "Stage changed from {{from}} to {{to}}",
+    "note_added": "Note added",
+    "assigned": "Assigned to {{name}}",
+    "created": "Candidate created",
+    "updated": "Candidate updated",
+    "duplicate_irrelevant": "Auto-marked irrelevant (previous duplicate)",
+    "duplicate_hired": "Marked as duplicate of hired worker"
+  },
+  "toast": {
+    "saved": "Saved successfully",
+    "created": "Candidate created",
+    "deleted": "Candidate deleted",
+    "imported": "Import completed",
+    "stageChanged": "Stage updated",
+    "error": "Something went wrong"
+  },
+  "errors": {
+    "missing_required_fields": "Missing required fields",
+    "import_failed": "Import failed",
+    "unauthorized": "Unauthorized",
+    "forbidden": "Forbidden"
+  },
+  "time": {
+    "justNow": "just now",
+    "minutes": "{{count}}m",
+    "hours": "{{count}}h",
+    "days": "{{count}}d"
+  }
+}

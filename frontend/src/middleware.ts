@@ -30,6 +30,16 @@ export default withAuth(
       );
     }
 
+    // /recruitment — admin, manager, analyst (viewer blocked)
+    if (
+      pathname.startsWith("/recruitment") &&
+      token?.role === Role.viewer
+    ) {
+      return NextResponse.redirect(
+        new URL("/dashboard?error=Unauthorized", req.url)
+      );
+    }
+
     return NextResponse.next();
   },
   {
@@ -43,8 +53,10 @@ export const config = {
   matcher: [
     "/dashboard/:path*",
     "/simulation/:path*",
+    "/recruitment/:path*",
     "/users/:path*",
     "/api/simulate/:path*",
     "/api/users/:path*",
+    "/api/recruitment/:path*",
   ],
 };

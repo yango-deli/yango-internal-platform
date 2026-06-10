@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   FlaskConical,
   Users,
+  UserPlus,
   ChevronRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -23,6 +24,12 @@ const navItems = [
     label: "Simulation",
     href: "/simulation",
     icon: FlaskConical,
+    roles: [Role.admin, Role.manager, Role.analyst],
+  },
+  {
+    label: "Recruitment",
+    href: "/recruitment",
+    icon: UserPlus,
     roles: [Role.admin, Role.manager, Role.analyst],
   },
   {
