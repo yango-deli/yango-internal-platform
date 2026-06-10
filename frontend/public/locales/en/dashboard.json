@@ -1,0 +1,142 @@
+{
+  "page": {
+    "title": "My Workspace",
+    "editMode": "Edit Dashboard",
+    "exitEditMode": "Done Editing"
+  },
+  "header": {
+    "greeting": "{{greeting}}, {{name}} 👋",
+    "roleBadge": "{{role}}"
+  },
+  "widgets": {
+    "outlook_mail": {
+      "title": "Outlook Mail",
+      "description": "Your latest emails from Microsoft 365",
+      "unread": "{{count}} unread",
+      "empty": "No recent emails",
+      "connectCta": "Connect Outlook",
+      "error": "Could not load emails"
+    },
+    "ms_todo": {
+      "title": "Microsoft To Do",
+      "description": "Tasks from your To Do lists",
+      "empty": "No pending tasks",
+      "connectCta": "Connect To Do",
+      "newTaskPlaceholder": "What needs to be done?",
+      "due": "Due",
+      "overdue": "Overdue",
+      "list": "List",
+      "error": "Could not load tasks"
+    },
+    "outlook_calendar": {
+      "title": "Outlook Calendar",
+      "description": "Your upcoming meetings for the next 7 days",
+      "empty": "No events in the next 7 days",
+      "connectCta": "Connect Calendar",
+      "today": "Today",
+      "error": "Could not load calendar"
+    },
+    "announcements": {
+      "title": "Announcements",
+      "description": "Company-wide and role-targeted updates",
+      "empty": "No announcements yet",
+      "pinnedTooltip": "Pinned announcement",
+      "postNew": "Post Announcement",
+      "modal": {
+        "title": "Post New Announcement",
+        "editTitle": "Edit Announcement",
+        "fields": {
+          "title": "Title",
+          "titlePlaceholder": "Important update...",
+          "body": "Message",
+          "bodyPlaceholder": "Write the announcement details here...",
+          "targetRoles": "Target Roles",
+          "targetRolesHint": "Leave empty to show to everyone",
+          "isPinned": "Pin to top",
+          "expiresAt": "Expires at (optional)"
+        },
+        "targetAll": "All roles",
+        "success": "Announcement published"
+      }
+    },
+    "shortcuts": {
+      "title": "Shortcuts",
+      "description": "Quick links to tools and resources",
+      "empty": "No shortcuts yet. Add your favorites!",
+      "add": "Add Shortcut",
+      "edit": "Edit Shortcut",
+      "modal": {
+        "title": "Add Shortcut",
+        "editTitle": "Edit Shortcut",
+        "fields": {
+          "title": "Title",
+          "titlePlaceholder": "e.g. Jira",
+          "url": "URL",
+          "urlPlaceholder": "https://...",
+          "icon": "Icon (emoji)",
+          "iconPlaceholder": "🔗",
+          "color": "Color",
+          "openInNewTab": "Open in new tab"
+        },
+        "emojiSearch": "Search emoji...",
+        "colors": {
+          "yellow": "Yellow",
+          "blue": "Blue",
+          "green": "Green",
+          "red": "Red",
+          "purple": "Purple",
+          "gray": "Gray"
+        }
+      },
+      "deleteConfirm": "Delete this shortcut?"
+    },
+    "quick_stats": {
+      "title": "Quick Stats",
+      "description": "At-a-glance metrics for your role",
+      "upcomingEvents": "Upcoming events today",
+      "pendingTasks": "Pending tasks",
+      "simulationsWeek": "Simulations this week",
+      "activeUsers": "Active users",
+      "newUsersMonth": "New users this month"
+    },
+    "recent_activity": {
+      "title": "Recent Activity",
+      "description": "Your latest simulation runs",
+      "empty": "No recent simulations",
+      "viewAll": "View All Simulations",
+      "columns": {
+        "file": "File",
+        "date": "Date",
+        "tiers": "Tiers"
+      }
+    }
+  },
+  "editMode": {
+    "toolbar": "Edit mode active — drag, resize, or remove widgets",
+    "addPanel": {
+      "title": "Add Widget",
+      "description": "Choose widgets to add to your workspace. Some widgets require Microsoft 365 connection.",
+      "available": "Available for your role",
+      "alreadyAdded": "Already on dashboard"
+    },
+    "remove": "Remove widget",
+    "dragHandle": "Drag to reorder",
+    "resizeHandle": "Resize"
+  },
+  "connect": {
+    "outlook": "Connect Outlook to see your mail here.",
+    "todo": "Connect Microsoft To Do to manage tasks.",
+    "calendar": "Connect Calendar to see upcoming meetings."
+  },
+  "settings": {
+    "languageSaved": "Language preference saved"
+  },
+  "shortcuts": {
+    "default": {
+      "jira": "Jira",
+      "confluence": "Confluence",
+      "hrPortal": "HR Portal",
+      "finance": "Finance"
+    }
+  }
+}

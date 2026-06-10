@@ -1,0 +1,112 @@
+{
+  "app": {
+    "name": "Yango Deli",
+    "tagline": "Internal Platform"
+  },
+  "roles": {
+    "admin": "Admin",
+    "manager": "Manager",
+    "analyst": "Analyst",
+    "viewer": "Viewer"
+  },
+  "nav": {
+    "dashboard": "My Workspace",
+    "simulation": "Simulation",
+    "users": "Users"
+  },
+  "buttons": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "close": "Close",
+    "retry": "Retry",
+    "connect": "Connect",
+    "disconnect": "Disconnect",
+    "post": "Post",
+    "discard": "Discard",
+    "addWidget": "Add Widget",
+    "editDashboard": "Edit Dashboard",
+    "doneEditing": "Done Editing",
+    "addShortcut": "Add Shortcut",
+    "newTask": "New Task",
+    "postAnnouncement": "Post Announcement"
+  },
+  "language": {
+    "switcher": "Language",
+    "he": "Hebrew",
+    "en": "English",
+    "ru": "Russian",
+    "label_he": "🇮🇱 HE",
+    "label_en": "🇬🇧 EN",
+    "label_ru": "🇷🇺 RU"
+  },
+  "greetings": {
+    "morning": "Good morning",
+    "afternoon": "Good afternoon",
+    "evening": "Good evening"
+  },
+  "relativeTime": {
+    "justNow": "Just now",
+    "minutesAgo": "{{count}} minutes ago",
+    "hoursAgo": "{{count}} hours ago",
+    "yesterday": "Yesterday",
+    "daysAgo": "{{count}} days ago"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "unauthorized": "You are not authorized to perform this action.",
+    "notFound": "Not found.",
+    "network": "Network error. Check your connection.",
+    "graph": {
+      "noToken": "Microsoft account not connected or token expired.",
+      "insufficientScope": "Missing permissions. Please reconnect the service.",
+      "connectOutlook": "Connect Outlook",
+      "connectTodo": "Connect To Do",
+      "connectCalendar": "Connect Calendar"
+    }
+  },
+  "empty": {
+    "noData": "No data yet.",
+    "noWidgets": "No widgets added yet."
+  },
+  "time": {
+    "today": "Today",
+    "tomorrow": "Tomorrow"
+  },
+  "calendar": {
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    },
+    "fullDays": {
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday"
+    }
+  },
+  "status": {
+    "unread": "unread",
+    "overdue": "overdue",
+    "pinned": "Pinned"
+  },
+  "toasts": {
+    "saved": "Changes saved",
+    "error": "Failed to save changes",
+    "widgetAdded": "Widget added",
+    "shortcutAdded": "Shortcut added",
+    "announcementPosted": "Announcement posted",
+    "taskCompleted": "Task marked complete",
+    "layoutSaved": "Dashboard layout saved"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "app": {
+    "name": "Yango Deli",
+    "tagline": "Внутренняя платформа"
+  },
+  "roles": {
+    "admin": "Администратор",
+    "manager": "Менеджер",
+    "analyst": "Аналитик",
+    "viewer": "Наблюдатель"
+  },
+  "nav": {
+    "dashboard": "Моя рабочая область",
+    "simulation": "Симуляция",
+    "users": "Пользователи"
+  },
+  "buttons": {
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "add": "Добавить",
+    "close": "Закрыть",
+    "retry": "Повторить",
+    "connect": "Подключить",
+    "disconnect": "Отключить",
+    "post": "Опубликовать",
+    "discard": "Отменить",
+    "addWidget": "Добавить виджет",
+    "editDashboard": "Редактировать дашборд",
+    "doneEditing": "Завершить редактирование",
+    "addShortcut": "Добавить ярлык",
+    "newTask": "Новая задача",
+    "postAnnouncement": "Опубликовать объявление"
+  },
+  "language": {
+    "switcher": "Язык",
+    "he": "Иврит",
+    "en": "Английский",
+    "ru": "Русский",
+    "label_he": "🇮🇱 HE",
+    "label_en": "🇬🇧 EN",
+    "label_ru": "🇷🇺 RU"
+  },
+  "greetings": {
+    "morning": "Доброе утро",
+    "afternoon": "Добрый день",
+    "evening": "Добрый вечер"
+  },
+  "relativeTime": {
+    "justNow": "Только что",
+    "minutesAgo": "{{count}} мин. назад",
+    "hoursAgo": "{{count}} ч. назад",
+    "yesterday": "Вчера",
+    "daysAgo": "{{count}} дн. назад"
+  },
+  "errors": {
+    "generic": "Что-то пошло не так. Пожалуйста, попробуйте снова.",
+    "unauthorized": "У вас нет прав для выполнения этого действия.",
+    "notFound": "Не найдено.",
+    "network": "Ошибка сети. Проверьте подключение.",
+    "graph": {
+      "noToken": "Аккаунт Microsoft не подключен или токен истек.",
+      "insufficientScope": "Недостаточно разрешений. Переподключите сервис.",
+      "connectOutlook": "Подключить Outlook",
+      "connectTodo": "Подключить To Do",
+      "connectCalendar": "Подключить Календарь"
+    }
+  },
+  "empty": {
+    "noData": "Данных пока нет.",
+    "noWidgets": "Виджеты ещё не добавлены."
+  },
+  "time": {
+    "today": "Сегодня",
+    "tomorrow": "Завтра"
+  },
+  "calendar": {
+    "days": {
+      "sun": "Вс",
+      "mon": "Пн",
+      "tue": "Вт",
+      "wed": "Ср",
+      "thu": "Чт",
+      "fri": "Пт",
+      "sat": "Сб"
+    },
+    "fullDays": {
+      "sunday": "Воскресенье",
+      "monday": "Понедельник",
+      "tuesday": "Вторник",
+      "wednesday": "Среда",
+      "thursday": "Четверг",
+      "friday": "Пятница",
+      "saturday": "Суббота"
+    }
+  },
+  "status": {
+    "unread": "непрочитанных",
+    "overdue": "просрочено",
+    "pinned": "Закреплено"
+  },
+  "toasts": {
+    "saved": "Изменения сохранены",
+    "error": "Не удалось сохранить изменения",
+    "widgetAdded": "Виджет добавлен",
+    "shortcutAdded": "Ярлык добавлен",
+    "announcementPosted": "Объявление опубликовано",
+    "taskCompleted": "Задача отмечена как выполненная",
+    "layoutSaved": "Макет дашборда сохранён"
+  }
+}

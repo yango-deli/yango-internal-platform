@@ -1,0 +1,112 @@
+{
+  "app": {
+    "name": "Yango Deli",
+    "tagline": "פלטפורמה פנימית"
+  },
+  "roles": {
+    "admin": "מנהל מערכת",
+    "manager": "מנהל",
+    "analyst": "אנליסט",
+    "viewer": "צופה"
+  },
+  "nav": {
+    "dashboard": "סביבת העבודה שלי",
+    "simulation": "סימולציה",
+    "users": "משתמשים"
+  },
+  "buttons": {
+    "save": "שמור",
+    "cancel": "ביטול",
+    "delete": "מחק",
+    "edit": "ערוך",
+    "add": "הוסף",
+    "close": "סגור",
+    "retry": "נסה שוב",
+    "connect": "התחבר",
+    "disconnect": "נתק",
+    "post": "פרסם",
+    "discard": "בטל שינויים",
+    "addWidget": "הוסף ווידג'ט",
+    "editDashboard": "ערוך לוח",
+    "doneEditing": "סיים עריכה",
+    "addShortcut": "הוסף קיצור דרך",
+    "newTask": "משימה חדשה",
+    "postAnnouncement": "פרסם הודעה"
+  },
+  "language": {
+    "switcher": "שפה",
+    "he": "עברית",
+    "en": "אנגלית",
+    "ru": "רוסית",
+    "label_he": "🇮🇱 HE",
+    "label_en": "🇬🇧 EN",
+    "label_ru": "🇷🇺 RU"
+  },
+  "greetings": {
+    "morning": "בוקר טוב",
+    "afternoon": "צהריים טובים",
+    "evening": "ערב טוב"
+  },
+  "relativeTime": {
+    "justNow": "עכשיו",
+    "minutesAgo": "לפני {{count}} דקות",
+    "hoursAgo": "לפני {{count}} שעות",
+    "yesterday": "אתמול",
+    "daysAgo": "לפני {{count}} ימים"
+  },
+  "errors": {
+    "generic": "משהו השתבש. אנא נסה שוב.",
+    "unauthorized": "אין לך הרשאה לבצע פעולה זו.",
+    "notFound": "לא נמצא.",
+    "network": "שגיאת רשת. בדוק את החיבור שלך.",
+    "graph": {
+      "noToken": "חשבון Microsoft לא מחובר או שהטוקן פג תוקף.",
+      "insufficientScope": "חסרות הרשאות. אנא התחבר מחדש לשירות.",
+      "connectOutlook": "התחבר ל-Outlook",
+      "connectTodo": "התחבר ל-To Do",
+      "connectCalendar": "התחבר ל-Calendar"
+    }
+  },
+  "empty": {
+    "noData": "אין נתונים עדיין.",
+    "noWidgets": "לא נוספו ווידג'טים עדיין."
+  },
+  "time": {
+    "today": "היום",
+    "tomorrow": "מחר"
+  },
+  "calendar": {
+    "days": {
+      "sun": "ראשון",
+      "mon": "שני",
+      "tue": "שלישי",
+      "wed": "רביעי",
+      "thu": "חמישי",
+      "fri": "שישי",
+      "sat": "שבת"
+    },
+    "fullDays": {
+      "sunday": "ראשון",
+      "monday": "שני",
+      "tuesday": "שלישי",
+      "wednesday": "רביעי",
+      "thursday": "חמישי",
+      "friday": "שישי",
+      "saturday": "שבת"
+    }
+  },
+  "status": {
+    "unread": "לא נקראו",
+    "overdue": "באיחור",
+    "pinned": "מוצמד"
+  },
+  "toasts": {
+    "saved": "השינויים נשמרו",
+    "error": "שמירת השינויים נכשלה",
+    "widgetAdded": "ווידג'ט נוסף",
+    "shortcutAdded": "קיצור דרך נוסף",
+    "announcementPosted": "ההודעה פורסמה",
+    "taskCompleted": "המשימה סומנה כהושלמה",
+    "layoutSaved": "פריסת הלוח נשמרה"
+  }
+}

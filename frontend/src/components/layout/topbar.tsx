@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { LogOut, ChevronDown } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { LanguageSwitcher } from "@/components/dashboard/LanguageSwitcher";
 
 function getTitleFromPath(pathname: string): string {
   if (pathname.startsWith("/simulation")) return "Simulation Tool";
@@ -36,7 +37,10 @@ export function Topbar() {
 
   return (
     <header className="h-14 flex items-center justify-between px-6 bg-white border-b border-gray-200">
-      <h1 className="text-base font-semibold text-gray-900">{title}</h1>
+      <div className="flex items-center gap-3">
+        <h1 className="text-base font-semibold text-gray-900">{title}</h1>
+        <LanguageSwitcher compact className="hidden md:flex" />
+      </div>
 
       <div className="relative" ref={ref}>
         <button

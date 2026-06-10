@@ -1,0 +1,142 @@
+{
+  "page": {
+    "title": "סביבת העבודה שלי",
+    "editMode": "ערוך לוח",
+    "exitEditMode": "סיים עריכה"
+  },
+  "header": {
+    "greeting": "{{greeting}}, {{name}} 👋",
+    "roleBadge": "{{role}}"
+  },
+  "widgets": {
+    "outlook_mail": {
+      "title": "דואר Outlook",
+      "description": "ההודעות האחרונות שלך מ-Microsoft 365",
+      "unread": "{{count}} לא נקראו",
+      "empty": "אין הודעות אחרונות",
+      "connectCta": "התחבר ל-Outlook",
+      "error": "לא ניתן לטעון הודעות"
+    },
+    "ms_todo": {
+      "title": "Microsoft To Do",
+      "description": "משימות מרשימות ה-To Do שלך",
+      "empty": "אין משימות בהמתנה",
+      "connectCta": "התחבר ל-To Do",
+      "newTaskPlaceholder": "מה צריך לעשות?",
+      "due": "תאריך יעד",
+      "overdue": "באיחור",
+      "list": "רשימה",
+      "error": "לא ניתן לטעון משימות"
+    },
+    "outlook_calendar": {
+      "title": "לוח שנה Outlook",
+      "description": "הפגישות הקרובות שלך ל-7 הימים הבאים",
+      "empty": "אין אירועים ב-7 הימים הקרובים",
+      "connectCta": "התחבר ללוח שנה",
+      "today": "היום",
+      "error": "לא ניתן לטעון לוח שנה"
+    },
+    "announcements": {
+      "title": "הודעות",
+      "description": "עדכונים כלל-ארגוניים וממוקדי תפקיד",
+      "empty": "אין הודעות עדיין",
+      "pinnedTooltip": "הודעה מוצמדת",
+      "postNew": "פרסם הודעה",
+      "modal": {
+        "title": "פרסם הודעה חדשה",
+        "editTitle": "ערוך הודעה",
+        "fields": {
+          "title": "כותרת",
+          "titlePlaceholder": "עדכון חשוב...",
+          "body": "הודעה",
+          "bodyPlaceholder": "כתוב כאן את פרטי ההודעה...",
+          "targetRoles": "תפקידי יעד",
+          "targetRolesHint": "השאר ריק כדי להציג לכולם",
+          "isPinned": "הצמד למעלה",
+          "expiresAt": "תוקף עד (אופציונלי)"
+        },
+        "targetAll": "כל התפקידים",
+        "success": "ההודעה פורסמה"
+      }
+    },
+    "shortcuts": {
+      "title": "קיצורי דרך",
+      "description": "קישורים מהירים לכלים ומשאבים",
+      "empty": "אין קיצורי דרך עדיין. הוסף את המועדפים שלך!",
+      "add": "הוסף קיצור דרך",
+      "edit": "ערוך קיצור דרך",
+      "modal": {
+        "title": "הוסף קיצור דרך",
+        "editTitle": "ערוך קיצור דרך",
+        "fields": {
+          "title": "כותרת",
+          "titlePlaceholder": "לדוגמה: Jira",
+          "url": "כתובת URL",
+          "urlPlaceholder": "https://...",
+          "icon": "אייקון (אימוג'י)",
+          "iconPlaceholder": "🔗",
+          "color": "צבע",
+          "openInNewTab": "פתח בחלון חדש"
+        },
+        "emojiSearch": "חפש אימוג'י...",
+        "colors": {
+          "yellow": "צהוב",
+          "blue": "כחול",
+          "green": "ירוק",
+          "red": "אדום",
+          "purple": "סגול",
+          "gray": "אפור"
+        }
+      },
+      "deleteConfirm": "למחוק את קיצור הדרך הזה?"
+    },
+    "quick_stats": {
+      "title": "סטטיסטיקות מהירות",
+      "description": "מדדים במבט חטוף לפי התפקיד שלך",
+      "upcomingEvents": "אירועים קרובים היום",
+      "pendingTasks": "משימות בהמתנה",
+      "simulationsWeek": "סימולציות השבוע",
+      "activeUsers": "משתמשים פעילים",
+      "newUsersMonth": "משתמשים חדשים החודש"
+    },
+    "recent_activity": {
+      "title": "פעילות אחרונה",
+      "description": "הרצות הסימולציה האחרונות שלך",
+      "empty": "אין סימולציות אחרונות",
+      "viewAll": "צפה בכל הסימולציות",
+      "columns": {
+        "file": "קובץ",
+        "date": "תאריך",
+        "tiers": "שכבות"
+      }
+    }
+  },
+  "editMode": {
+    "toolbar": "מצב עריכה פעיל — גרור, שנה גודל או הסר ווידג'טים",
+    "addPanel": {
+      "title": "הוסף ווידג'ט",
+      "description": "בחר ווידג'טים להוסיף לסביבת העבודה שלך. חלק מהווידג'טים דורשים חיבור Microsoft 365.",
+      "available": "זמינים לתפקיד שלך",
+      "alreadyAdded": "כבר בלוח"
+    },
+    "remove": "הסר ווידג'ט",
+    "dragHandle": "גרור לסידור מחדש",
+    "resizeHandle": "שנה גודל"
+  },
+  "connect": {
+    "outlook": "התחבר ל-Outlook כדי לראות את הדואר שלך כאן.",
+    "todo": "התחבר ל-Microsoft To Do כדי לנהל משימות.",
+    "calendar": "התחבר ללוח שנה כדי לראות פגישות קרובות."
+  },
+  "settings": {
+    "languageSaved": "העדפת השפה נשמרה"
+  },
+  "shortcuts": {
+    "default": {
+      "jira": "Jira",
+      "confluence": "Confluence",
+      "hrPortal": "פורטל HR",
+      "finance": "פיננסים"
+    }
+  }
+}

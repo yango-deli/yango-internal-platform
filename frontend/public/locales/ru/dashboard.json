@@ -1,0 +1,142 @@
+{
+  "page": {
+    "title": "Моя рабочая область",
+    "editMode": "Редактировать дашборд",
+    "exitEditMode": "Завершить редактирование"
+  },
+  "header": {
+    "greeting": "{{greeting}}, {{name}} 👋",
+    "roleBadge": "{{role}}"
+  },
+  "widgets": {
+    "outlook_mail": {
+      "title": "Почта Outlook",
+      "description": "Ваши последние письма из Microsoft 365",
+      "unread": "{{count}} непрочитанных",
+      "empty": "Нет недавних писем",
+      "connectCta": "Подключить Outlook",
+      "error": "Не удалось загрузить письма"
+    },
+    "ms_todo": {
+      "title": "Microsoft To Do",
+      "description": "Задачи из ваших списков To Do",
+      "empty": "Нет задач в ожидании",
+      "connectCta": "Подключить To Do",
+      "newTaskPlaceholder": "Что нужно сделать?",
+      "due": "Срок",
+      "overdue": "Просрочено",
+      "list": "Список",
+      "error": "Не удалось загрузить задачи"
+    },
+    "outlook_calendar": {
+      "title": "Календарь Outlook",
+      "description": "Ваши предстоящие встречи на ближайшие 7 дней",
+      "empty": "Нет событий на ближайшие 7 дней",
+      "connectCta": "Подключить Календарь",
+      "today": "Сегодня",
+      "error": "Не удалось загрузить календарь"
+    },
+    "announcements": {
+      "title": "Объявления",
+      "description": "Обновления для всей компании и по ролям",
+      "empty": "Объявлений пока нет",
+      "pinnedTooltip": "Закреплённое объявление",
+      "postNew": "Опубликовать объявление",
+      "modal": {
+        "title": "Опубликовать новое объявление",
+        "editTitle": "Редактировать объявление",
+        "fields": {
+          "title": "Заголовок",
+          "titlePlaceholder": "Важное обновление...",
+          "body": "Сообщение",
+          "bodyPlaceholder": "Напишите здесь текст объявления...",
+          "targetRoles": "Целевые роли",
+          "targetRolesHint": "Оставьте пустым, чтобы показать всем",
+          "isPinned": "Закрепить сверху",
+          "expiresAt": "Истекает (необязательно)"
+        },
+        "targetAll": "Все роли",
+        "success": "Объявление опубликовано"
+      }
+    },
+    "shortcuts": {
+      "title": "Ярлыки",
+      "description": "Быстрые ссылки на инструменты и ресурсы",
+      "empty": "Ярлыков пока нет. Добавьте избранное!",
+      "add": "Добавить ярлык",
+      "edit": "Редактировать ярлык",
+      "modal": {
+        "title": "Добавить ярлык",
+        "editTitle": "Редактировать ярлык",
+        "fields": {
+          "title": "Название",
+          "titlePlaceholder": "например: Jira",
+          "url": "URL",
+          "urlPlaceholder": "https://...",
+          "icon": "Иконка (эмодзи)",
+          "iconPlaceholder": "🔗",
+          "color": "Цвет",
+          "openInNewTab": "Открыть в новой вкладке"
+        },
+        "emojiSearch": "Поиск эмодзи...",
+        "colors": {
+          "yellow": "Жёлтый",
+          "blue": "Синий",
+          "green": "Зелёный",
+          "red": "Красный",
+          "purple": "Фиолетовый",
+          "gray": "Серый"
+        }
+      },
+      "deleteConfirm": "Удалить этот ярлык?"
+    },
+    "quick_stats": {
+      "title": "Быстрая статистика",
+      "description": "Ключевые метрики для вашей роли",
+      "upcomingEvents": "События сегодня",
+      "pendingTasks": "Задачи в ожидании",
+      "simulationsWeek": "Симуляций за неделю",
+      "activeUsers": "Активные пользователи",
+      "newUsersMonth": "Новые пользователи за месяц"
+    },
+    "recent_activity": {
+      "title": "Недавняя активность",
+      "description": "Ваши последние запуски симуляций",
+      "empty": "Нет недавних симуляций",
+      "viewAll": "Посмотреть все симуляции",
+      "columns": {
+        "file": "Файл",
+        "date": "Дата",
+        "tiers": "Уровни"
+      }
+    }
+  },
+  "editMode": {
+    "toolbar": "Режим редактирования — перетаскивайте, изменяйте размер или удаляйте виджеты",
+    "addPanel": {
+      "title": "Добавить виджет",
+      "description": "Выберите виджеты для добавления в рабочую область. Некоторые требуют подключения Microsoft 365.",
+      "available": "Доступно для вашей роли",
+      "alreadyAdded": "Уже на дашборде"
+    },
+    "remove": "Удалить виджет",
+    "dragHandle": "Перетащите для изменения порядка",
+    "resizeHandle": "Изменить размер"
+  },
+  "connect": {
+    "outlook": "Подключите Outlook, чтобы видеть почту здесь.",
+    "todo": "Подключите Microsoft To Do для управления задачами.",
+    "calendar": "Подключите Календарь, чтобы видеть предстоящие встречи."
+  },
+  "settings": {
+    "languageSaved": "Предпочтение языка сохранено"
+  },
+  "shortcuts": {
+    "default": {
+      "jira": "Jira",
+      "confluence": "Confluence",
+      "hrPortal": "HR Портал",
+      "finance": "Финансы"
+    }
+  }
+}
