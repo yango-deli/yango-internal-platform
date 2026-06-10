@@ -1,22 +1,37 @@
 import { NextAuthOptions } from "next-auth";
 import AzureADProvider from "next-auth/providers/azure-ad";
-import { PrismaAdapter } from "@auth/prisma-adapter";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import { Role } from "@prisma/client";
+import type { AdapterAccount } from "next-auth/adapters";
 
 const adminEmails = (process.env.ADMIN_EMAILS ?? "")
   .split(",")
   .map((e) => e.trim().toLowerCase())
   .filter(Boolean);
 
+// Azure AD returns extra fields (ext_expires_in, etc.) that Prisma rejects.
+// Patch linkAccount to only pass fields the schema knows about.
+const baseAdapter = PrismaAdapter(prisma);
+const patchedAdapter = {
+  ...baseAdapter,
+  linkAccount: (account: AdapterAccount) => {
+    const { userId, type, provider, providerAccountId, refresh_token, access_token, expires_at, token_type, scope, id_token, session_state } = account;
+    return prisma.account.create({
+      data: { userId, type, provider, providerAccountId, refresh_token, access_token, expires_at, token_type, scope, id_token, session_state },
+    });
+  },
+};
+
 export const authOptions: NextAuthOptions = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  adapter: PrismaAdapter(prisma) as any,
+  adapter: patchedAdapter as any,
   providers: [
     AzureADProvider({
       clientId: process.env.AZURE_AD_CLIENT_ID!,
       clientSecret: process.env.AZURE_AD_CLIENT_SECRET!,
       tenantId: process.env.AZURE_AD_TENANT_ID!,
+      allowDangerousEmailAccountLinking: true,
     }),
   ],
   session: {

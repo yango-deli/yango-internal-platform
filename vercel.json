@@ -1,0 +1,9 @@
+{
+  "experimentalServices": {
+    "python-api": {
+      "root": "python-api",
+      "entrypoint": "app.main:app",
+      "routePrefix": "/"
+    }
+  }
+}

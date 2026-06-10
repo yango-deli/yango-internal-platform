@@ -8,6 +8,10 @@ const ERROR_MESSAGES: Record<string, string> = {
   OAuthSignin: "Error connecting to Microsoft. Please try again.",
   OAuthCallback: "Authentication error. Please try again.",
   OAuthAccountNotLinked: "Account not linked. Please contact your administrator.",
+  OAuthCreateAccount: "Could not create your account. Please try again.",
+  Callback: "Callback error. Please try again.",
+  Configuration: "Server configuration error. Please contact your administrator.",
+  AccessDenied: "Access denied.",
   Default: "An error occurred. Please try again.",
 };
 
@@ -53,6 +57,7 @@ export function LoginForm({ error }: { error?: string }) {
           {errorMessage && (
             <div className="mb-5 px-4 py-3 bg-red-50 border border-red-200 rounded-lg">
               <p className="text-red-700 text-sm">{errorMessage}</p>
+              <p className="text-red-400 text-xs mt-1">Error code: {error}</p>
             </div>
           )}
 

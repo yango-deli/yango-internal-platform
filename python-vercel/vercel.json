@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/simulate.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "50mb" }
+    }
+  ],
+  "routes": [
+    { "src": "/api/simulate", "dest": "api/simulate.py" },
+    { "src": "/health", "dest": "api/simulate.py" }
+  ]
+}

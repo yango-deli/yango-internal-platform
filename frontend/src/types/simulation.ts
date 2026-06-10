@@ -20,10 +20,7 @@ export interface SimulationResult {
   emailText: string;
   xlsxBase64: string;
   runId: string;
-  dateRangeUsed: {
-    from: string;
-    to: string;
-  };
+  dateRangeUsed: { from: string; to: string };
   totalOrdersAnalyzed: number;
 }
 
@@ -44,13 +41,40 @@ export interface SimulationConfig {
   contactName: string;
 }
 
-export const DEFAULT_CONFIG: Omit<SimulationConfig, "supplierName" | "contactName"> = {
-  basketValueCol: "L",
+// Per-file config (everything except global tier/cost/uplift settings)
+export interface FileConfig {
+  id: string;           // uuid, client-only
+  file: File;
+  supplierName: string;
+  contactName: string;
+  dateCol: string;
+  orderIdCol: string;
+  basketValueCol: string;
+  quantityCol: string;
+  gmvCol: string;
+  brandCol: string;
+}
+
+// Global settings shared across all files
+export interface GlobalSettings {
+  upliftRates: number[];
+  basketTiersValue: number[];
+  basketTiersUnits: number[];
+  deliveryCostPerOrder: number;
+  fixedOperationalCost: number;
+  lookbackDays: number;
+}
+
+export const DEFAULT_FILE_COLS = {
+  dateCol: "A",
   orderIdCol: "D",
-  brandCol: "",
-  quantityCol: "",
-  gmvCol: "",
-  dateCol: "",
+  basketValueCol: "L",
+  quantityCol: "E",
+  gmvCol: "F",
+  brandCol: "B",
+};
+
+export const DEFAULT_GLOBAL: GlobalSettings = {
   upliftRates: [0.3, 0.5],
   basketTiersValue: [25, 30, 35],
   basketTiersUnits: [2, 3],
