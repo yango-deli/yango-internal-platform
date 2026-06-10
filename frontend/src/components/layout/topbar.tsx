@@ -10,7 +10,7 @@ import { LanguageSwitcher } from "@/components/dashboard/LanguageSwitcher";
 function getTitleFromPath(pathname: string): string {
   if (pathname.startsWith("/simulation")) return "Simulation Tool";
   if (pathname.startsWith("/users")) return "User Management";
-  return "Dashboard";
+  return "My Workspace";
 }
 
 export function Topbar() {

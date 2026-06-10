@@ -14,7 +14,7 @@ import { Role } from "@prisma/client";
 
 const navItems = [
   {
-    label: "Dashboard",
+    label: "My Workspace",
     href: "/dashboard",
     icon: LayoutDashboard,
     roles: [Role.admin, Role.manager, Role.analyst, Role.viewer],
