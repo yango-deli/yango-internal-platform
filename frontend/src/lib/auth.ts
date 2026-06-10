@@ -32,6 +32,11 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.AZURE_AD_CLIENT_SECRET!,
       tenantId: process.env.AZURE_AD_TENANT_ID!,
       allowDangerousEmailAccountLinking: true,
+      authorization: {
+        params: {
+          scope: "openid profile email User.Read Mail.Read Tasks.ReadWrite Calendars.Read",
+        },
+      },
     }),
   ],
   session: {
@@ -61,7 +66,12 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
 
-    async jwt({ token, trigger }) {
+    async jwt({ token, account, trigger }) {
+      // Persist Graph-capable access token from Azure AD on initial sign-in
+      if (account?.access_token) {
+        token.accessToken = account.access_token;
+      }
+
       if (trigger === "signIn" || !token.role) {
         const dbUser = await prisma.user.findUnique({
           where: { email: token.email! },
@@ -102,6 +112,8 @@ export const authOptions: NextAuthOptions = {
         session.user.role = token.role as Role;
         session.user.id = token.userId as string;
       }
+      // Expose accessToken for Microsoft Graph calls from client widgets
+      session.accessToken = token.accessToken as string | undefined;
       return session;
     },
   },

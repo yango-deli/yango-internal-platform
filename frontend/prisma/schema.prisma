@@ -42,18 +42,23 @@ model Session {
 }
 
 model User {
-  id            String          @id @default(cuid())
-  name          String?
-  email         String          @unique
-  emailVerified DateTime?
-  image         String?
-  role          Role            @default(viewer)
-  isActive      Boolean         @default(true)
-  accounts      Account[]
-  sessions      Session[]
-  runs          SimulationRun[]
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+  id                String                 @id @default(cuid())
+  name              String?
+  email             String                 @unique
+  emailVerified     DateTime?
+  image             String?
+  role              Role                   @default(viewer)
+  isActive          Boolean                @default(true)
+  accounts          Account[]
+  sessions          Session[]
+  runs              SimulationRun[]
+  settings          UserSettings?
+  dashboardLayout   UserDashboardLayout?
+  shortcuts         UserShortcut[]
+  widgetConfigs     UserWidgetConfig[]
+  announcements     CompanyAnnouncement[]  // authored announcements
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
 }
 
 model VerificationToken {
@@ -72,4 +77,64 @@ model SimulationRun {
   config    Json
   summary   Json
   createdAt DateTime @default(now())
+}
+
+model UserSettings {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  language  String   @default("he")    // "he" | "en" | "ru"
+  theme     String   @default("light") // "light" | "dark" | "system"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserDashboardLayout {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  layout    Json
+  updatedAt DateTime @updatedAt
+}
+
+model UserShortcut {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title        String
+  url          String
+  icon         String?
+  color        String?
+  openInNewTab Boolean  @default(false)
+  position     Int      @default(0)
+  isVisible    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model UserWidgetConfig {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  widgetKey String
+  position  Int
+  size      String   @default("medium")  // "small" | "medium" | "large" | "full"
+  config    Json?
+  isVisible Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([userId, widgetKey])
+}
+
+model CompanyAnnouncement {
+  id          String    @id @default(cuid())
+  title       String
+  body        String    @db.Text
+  authorId    String
+  author      User      @relation(fields: [authorId], references: [id])
+  isPinned    Boolean   @default(false)
+  targetRoles String[]
+  expiresAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
