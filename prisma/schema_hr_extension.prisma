@@ -1,0 +1,166 @@
+// ─────────────────────────────────────────────────────────────
+//  HR Module - Prisma Schema Extension
+//  Appended to the main schema.prisma in the existing repo
+// ─────────────────────────────────────────────────────────────
+
+model Department {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  workers   Worker[]
+  createdAt DateTime @default(now())
+}
+
+model Store {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  workers   Worker[]
+  createdAt DateTime @default(now())
+}
+
+model Worker {
+  id             String    @id @default(cuid())
+  firstName      String
+  lastName       String
+  phone          String    @unique
+  email          String?   @unique
+  workEmail      String?
+  idNumber       String?   @unique
+  dateOfBirth    DateTime?
+  address        String?
+  city           String?
+  maritalStatus  String?
+  profileImage   String?
+
+  employeeNumber  String?  @unique
+  positionTitle   String?
+  positionDesc    String?
+  workerType      String?   // office | store | courier
+  employmentType  String?   // permanent | temporary | partial | contractor
+  jobScope        Int?      // % e.g. 100, 50
+  vehicleType     String?   // bike | motorcycle | car
+  vehicleNumber   String?
+  leadSource      String?
+
+  status          String   @default("active") // active | inactive | on_leave | terminated
+  startDate       DateTime?
+  endDate         DateTime?
+
+  grossSalary          Float?
+  grossSalaryCurrency  String?   @default("ILS")
+  netSalary            Float?
+  netSalaryCurrency    String?   @default("ILS")
+  bankName             String?
+  bankBranch           String?
+  bankAccount          String?
+
+  departmentId  String?
+  department    Department?  @relation(fields: [departmentId], references: [id])
+  storeId       String?
+  store         Store?       @relation(fields: [storeId], references: [id])
+
+  managerId     String?
+  manager       Worker?      @relation("ManagerSubordinates", fields: [managerId], references: [id])
+  subordinates  Worker[]     @relation("ManagerSubordinates")
+
+  createdById   String?
+  createdBy     User?        @relation("WorkerCreatedBy", fields: [createdById], references: [id])
+
+  candidateId        String?
+  candidate          Candidate? @relation(fields: [candidateId], references: [id])
+  convertedWorker    Candidate? @relation("ConvertedWorker")
+
+  documents          WorkerDocument[]
+  equipment          WorkerEquipment[]
+  previousPositions  WorkerPosition[]
+  activityLog        WorkerActivity[]
+  fundSubscriptions  WorkerFund[]
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model WorkerDocument {
+  id          String   @id @default(cuid())
+  workerId    String
+  worker      Worker   @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  type        String   // contract | form101 | idCopy | nda | certificates | vehicleLicense | drivingLicense | other
+  title       String
+  fileName    String
+  fileUrl     String
+  fileSize    Int?
+  mimeType    String?
+  isLatest    Boolean  @default(true)
+  version     Int      @default(1)
+  replacesId  String?
+  uploadedById String?
+  uploadedBy  User?    @relation(fields: [uploadedById], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+model WorkerEquipment {
+  id           String    @id @default(cuid())
+  workerId     String
+  worker       Worker    @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  name         String
+  description  String?
+  serialNumber String?
+  assignedDate DateTime?
+  returnedDate DateTime?
+  status       String    @default("assigned") // assigned | returned | lost
+  createdAt    DateTime  @default(now())
+}
+
+model WorkerPosition {
+  id            String    @id @default(cuid())
+  workerId      String
+  worker        Worker    @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  positionTitle String
+  department    String?
+  store         String?
+  startDate     DateTime?
+  endDate       DateTime?
+  notes         String?
+  order         Int       @default(0)
+  createdAt     DateTime  @default(now())
+}
+
+model WorkerActivity {
+  id          String   @id @default(cuid())
+  workerId    String
+  worker      Worker   @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+  type        String
+  description String
+  fieldName   String?
+  oldValue    String?
+  newValue    String?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+}
+
+model WorkerFund {
+  id             String   @id @default(cuid())
+  workerId       String
+  worker         Worker   @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  fundType       String   // pension | continuing
+  providerName   String
+  policyNumber   String?
+  employeeRate   Float?
+  employerRate   Float?
+  createdAt      DateTime @default(now())
+}
+
+model HrFieldPermission {
+  id        String  @id @default(cuid())
+  fieldKey  String  // personal | employment | salary | bank | documents | equipment | career
+  role      String  // admin | manager | analyst | viewer
+  canView   Boolean @default(true)
+  canEdit   Boolean @default(false)
+
+  @@unique([fieldKey, role])
+}
+
+// Extension to Candidate model (add to existing):
+// convertedWorkerId  String?  @unique
+// convertedWorker    Worker?  @relation("ConvertedWorker", fields: [convertedWorkerId], references: [id])
