@@ -16,11 +16,17 @@ export async function GET() {
 
   const announcements = await prisma.companyAnnouncement.findMany({
     where: {
-      OR: [
-        { targetRoles: { isEmpty: true } },
-        { targetRoles: { has: role } },
+      AND: [
+        {
+          OR: [
+            { targetRoles: { isEmpty: true } },
+            { targetRoles: { has: role } },
+          ],
+        },
+        {
+          OR: [{ expiresAt: null }, { expiresAt: { gt: now } }],
+        },
       ],
-      OR: [{ expiresAt: null }, { expiresAt: { gt: now } }],
     },
     orderBy: [{ isPinned: "desc" }, { createdAt: "desc" }],
     include: {

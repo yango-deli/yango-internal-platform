@@ -17,8 +17,11 @@ export default async function AppLayout({
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      <Sidebar />
-      <div className="flex flex-col flex-1 min-w-0">
+      {/* Sidebar on left (ltr) / right (rtl) via order + html[dir] */}
+      <div className="rtl:order-2">
+        <Sidebar />
+      </div>
+      <div className="flex flex-col flex-1 min-w-0 rtl:order-1">
         <Topbar />
         <main className="flex-1 p-6 overflow-auto">{children}</main>
       </div>

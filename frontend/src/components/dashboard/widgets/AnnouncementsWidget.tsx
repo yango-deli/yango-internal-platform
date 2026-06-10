@@ -75,7 +75,7 @@ export function AnnouncementsWidget({ editMode, onRemove }: { editMode?: boolean
             <div key={a.id} className="rounded-lg border border-gray-100 p-2.5 text-sm">
               <div className="flex items-start justify-between gap-2">
                 <div className="font-semibold text-gray-900 flex items-center gap-1.5">
-                  {a.isPinned && <Pin className="h-3.5 w-3.5 text-amber-500" title={t("widgets.announcements.pinnedTooltip")} />}
+                  {a.isPinned && <Pin className="h-3.5 w-3.5 text-amber-500" data-title={t("widgets.announcements.pinnedTooltip")} />}
                   {a.title}
                 </div>
                 <div className="text-[10px] text-gray-400 whitespace-nowrap">{new Date(a.createdAt).toLocaleDateString()}</div>

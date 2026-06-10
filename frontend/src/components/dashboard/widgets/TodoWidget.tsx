@@ -25,11 +25,11 @@ export function TodoWidget({ editMode, onRemove }: { editMode?: boolean; onRemov
     if (!accessToken) { setLoading(false); return; }
     setLoading(true); setError(null);
     const res = await getMyTodoTasks(accessToken, 8);
-    if (res.error) {
+    if ("error" in res && res.error) {
       setError(t("widgets.ms_todo.error"));
-    } else if (res.data) {
+    } else if ("data" in res && res.data) {
       setTasks(res.data as any);
-      setListName(res.listName || "");
+      setListName((res as any).listName || "");
     }
     setLoading(false);
   }, [accessToken, t]);

@@ -8,7 +8,7 @@ import type { SupportedLanguage, WidgetKey, DashboardLayout } from "@/types/dash
 import { WIDGET_DEFINITIONS, getDefaultLayoutForRole } from "@/types/dashboard";
 import { Role } from "@prisma/client";
 
-import { Responsive, WidthProvider } from "react-grid-layout";
+import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 
@@ -24,8 +24,6 @@ import { EditModeToolbar } from "@/components/dashboard/EditModeToolbar";
 import { AddWidgetPanel } from "@/components/dashboard/AddWidgetPanel";
 import { Button } from "@/components/ui/button";
 import { Pencil, Plus } from "lucide-react";
-
-const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const WIDGET_MAP: Record<WidgetKey, React.ComponentType<any>> = {
   outlook_mail: OutlookMailWidget,
@@ -118,10 +116,11 @@ export default function DashboardPage() {
     }));
   }, [currentLayoutItems]);
 
-  function handleLayoutChange(newLayout: any[]) {
+  function handleLayoutChange(_layout: any, allLayouts: any) {
     if (!editMode) return;
+    const lg = allLayouts?.lg || _layout || [];
     const updated: DashboardLayout = {
-      lg: newLayout.map((l: any) => ({
+      lg: lg.map((l: any) => ({
         i: l.i as WidgetKey,
         x: l.x,
         y: l.y,
@@ -225,11 +224,9 @@ export default function DashboardPage() {
           cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
           rowHeight={70}
           onLayoutChange={handleLayoutChange}
-          isDraggable={editMode}
-          isResizable={editMode}
           margin={[12, 12]}
           containerPadding={[0, 0]}
-          useCSSTransforms
+          width={1200}
         >
           {visibleWidgets.map((key) => {
             const Widget = WIDGET_MAP[key];

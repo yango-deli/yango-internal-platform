@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import type { DashboardLayout, Role } from "@/types/dashboard";
+import type { DashboardLayout } from "@/types/dashboard";
 import { getDefaultLayoutForRole } from "@/types/dashboard";
 import { Role as PrismaRole } from "@prisma/client";
 
@@ -13,7 +13,7 @@ export async function GET() {
   }
 
   const userId = session.user.id;
-  const role = (session.user.role || "viewer") as Role;
+  const role = (session.user.role || "viewer") as PrismaRole;
 
   let layoutRecord = await prisma.userDashboardLayout.findUnique({
     where: { userId },
@@ -21,7 +21,7 @@ export async function GET() {
 
   if (!layoutRecord) {
     // Seed default layout for role on first access
-    const defaultLayout = getDefaultLayoutForRole(role as PrismaRole);
+    const defaultLayout = getDefaultLayoutForRole(role);
     layoutRecord = await prisma.userDashboardLayout.create({
       data: {
         userId,
