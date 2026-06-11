@@ -1,67 +1,67 @@
 "use client";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { WorkerProfileHeader } from "./WorkerProfileHeader";
-import { PersonalTab } from "./tabs/PersonalTab";
-import { EmploymentTab } from "./tabs/EmploymentTab";
-import { SalaryTab } from "./tabs/SalaryTab";
-import { DocumentsTab } from "./tabs/DocumentsTab";
-import { EquipmentTab } from "./tabs/EquipmentTab";
-import { CareerHistoryTab } from "./tabs/CareerHistoryTab";
-import { ActivityTab } from "./tabs/ActivityTab";
+import { WorkerProfileHeader } from "@/components/hr/WorkerProfileHeader";
+import { PersonalTab } from "@/components/hr/tabs/PersonalTab";
+import { EmploymentTab } from "@/components/hr/tabs/EmploymentTab";
+import { SalaryTab } from "@/components/hr/tabs/SalaryTab";
+import { DocumentsTab } from "@/components/hr/tabs/DocumentsTab";
+import { EquipmentTab } from "@/components/hr/tabs/EquipmentTab";
+import { CareerHistoryTab } from "@/components/hr/tabs/CareerHistoryTab";
+import { ActivityTab } from "@/components/hr/tabs/ActivityTab";
 import { toast } from "sonner";
 
-interface Props { worker: any; onUpdate: () => void; }
+const TABS = ["personal","employment","salary","documents","equipment","career","activity"];
 
-export function WorkerProfile({ worker: initialWorker, onUpdate }: Props) {
+export function WorkerProfile({ worker: initialWorker, onUpdate }: { worker: any; onUpdate: () => void }) {
   const { t } = useTranslation("hr");
+  const router = useRouter();
   const [worker, setWorker] = useState(initialWorker);
-  const [draft, setDraft] = useState<Partial<typeof initialWorker>>({});
-  const editing = Object.keys(draft).length > 0;
+  const [editing, setEditing] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [dirty, setDirty] = useState<Partial<any>>({});
 
-  const updateDraft = (fields: Record<string, any>) => setDraft((prev) => ({ ...prev, ...fields }));
-
-  const handleSave = async () => {
-    try {
-      const res = await fetch(`/api/hr/workers/${worker.id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(draft),
-      });
-      if (!res.ok) throw new Error();
-      const updated = await res.json();
-      setWorker(updated);
-      setDraft({});
-      onUpdate();
-      toast.success(t("profile.saveAll"));
-    } catch {
-      toast.error(t("common.error"));
-    }
+  const handleChange = (patch: Partial<any>) => {
+    setWorker((p: any) => ({ ...p, ...patch }));
+    setDirty((p) => ({ ...p, ...patch }));
+    if (!editing) setEditing(true);
   };
 
-  const handleDiscard = () => { setDraft({}); setWorker(initialWorker); };
-  const merged = { ...worker, ...draft };
+  const handleSave = async () => {
+    setSaving(true);
+    const res = await fetch(`/api/hr/workers/${worker.id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dirty) });
+    if (res.ok) { setEditing(false); setDirty({}); onUpdate(); toast.success(t("profile.saveAll")); }
+    else toast.error(t("common.error"));
+    setSaving(false);
+  };
+
+  const handleDiscard = () => {
+    if (editing) { setWorker(initialWorker); setDirty({}); setEditing(false); }
+    else setEditing(true);
+  };
+
+  const handleDelete = async () => {
+    if (!confirm(t("profile.deleteConfirm"))) return;
+    const res = await fetch(`/api/hr/workers/${worker.id}`, { method: "DELETE" });
+    if (res.ok) router.push("/hr");
+    else toast.error(t("common.error"));
+  };
 
   return (
-    <div className="space-y-6">
-      <WorkerProfileHeader worker={merged} editing={editing} onSave={handleSave} onDiscard={handleDiscard} onWorkerUpdate={setWorker} />
-      <Tabs defaultValue="personal">
-        <TabsList className="flex-wrap">
-          <TabsTrigger value="personal">{t("tabs.personal")}</TabsTrigger>
-          <TabsTrigger value="employment">{t("tabs.employment")}</TabsTrigger>
-          <TabsTrigger value="salary">{t("tabs.salary")}</TabsTrigger>
-          <TabsTrigger value="documents">{t("tabs.documents")}</TabsTrigger>
-          <TabsTrigger value="equipment">{t("tabs.equipment")}</TabsTrigger>
-          <TabsTrigger value="career">{t("tabs.career")}</TabsTrigger>
-          <TabsTrigger value="activity">{t("tabs.activity")}</TabsTrigger>
+    <div className="border rounded-xl overflow-hidden bg-white">
+      <WorkerProfileHeader worker={worker} editing={editing} onChange={handleChange} onSave={handleSave} onDiscard={handleDiscard} onDelete={handleDelete} saving={saving} />
+      <Tabs defaultValue="personal" className="p-6">
+        <TabsList className="flex flex-wrap gap-1 h-auto mb-6">
+          {TABS.map((tab) => <TabsTrigger key={tab} value={tab} className="text-xs">{t(`tabs.${tab}`)}</TabsTrigger>)}
         </TabsList>
-        <TabsContent value="personal"><PersonalTab worker={merged} onChange={updateDraft} /></TabsContent>
-        <TabsContent value="employment"><EmploymentTab worker={merged} onChange={updateDraft} /></TabsContent>
-        <TabsContent value="salary"><SalaryTab worker={merged} onChange={updateDraft} /></TabsContent>
+        <TabsContent value="personal"><PersonalTab worker={worker} onChange={handleChange} /></TabsContent>
+        <TabsContent value="employment"><EmploymentTab worker={worker} onChange={handleChange} /></TabsContent>
+        <TabsContent value="salary"><SalaryTab worker={worker} onChange={handleChange} /></TabsContent>
         <TabsContent value="documents"><DocumentsTab workerId={worker.id} /></TabsContent>
         <TabsContent value="equipment"><EquipmentTab workerId={worker.id} /></TabsContent>
-        <TabsContent value="career"><CareerHistoryTab workerId={worker.id} positions={merged.previousPositions ?? []} /></TabsContent>
+        <TabsContent value="career"><CareerHistoryTab workerId={worker.id} worker={worker} /></TabsContent>
         <TabsContent value="activity"><ActivityTab workerId={worker.id} /></TabsContent>
       </Tabs>
     </div>

@@ -1,81 +1,83 @@
 "use client";
 import { useTranslation } from "next-i18next";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Camera, Save, X } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Camera, Save, X, Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import { differenceInMonths } from "date-fns";
 
-const STATUS_COLORS: Record<string, string> = {
-  active: "bg-green-100 text-green-800 border-green-200",
-  inactive: "bg-gray-100 text-gray-600 border-gray-200",
-  on_leave: "bg-yellow-100 text-yellow-800 border-yellow-200",
-  terminated: "bg-red-100 text-red-800 border-red-200",
-};
+const STATUSES = ["active","inactive","on_leave","terminated"];
+const STATUS_COLORS: Record<string, string> = { active: "bg-green-100 text-green-800", inactive: "bg-gray-100 text-gray-600", on_leave: "bg-yellow-100 text-yellow-800", terminated: "bg-red-100 text-red-800" };
 
-interface Props { worker: any; editing: boolean; onSave: () => void; onDiscard: () => void; onWorkerUpdate: (w: any) => void; }
-
-export function WorkerProfileHeader({ worker, editing, onSave, onDiscard, onWorkerUpdate }: Props) {
+export function WorkerProfileHeader({ worker, editing, onChange, onSave, onDiscard, onDelete, saving }: {
+  worker: any; editing: boolean; onChange: (f: Partial<any>) => void;
+  onSave: () => void; onDiscard: () => void; onDelete: () => void; saving: boolean;
+}) {
   const { t } = useTranslation("hr");
   const fileRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
   const initials = `${worker.firstName?.[0] ?? ""}${worker.lastName?.[0] ?? ""}`.toUpperCase();
+
+  const handlePhoto = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]; if (!file) return;
+    setUploading(true);
+    const fd = new FormData(); fd.append("file", file);
+    const res = await fetch(`/api/hr/workers/${worker.id}/photo`, { method: "POST", body: fd });
+    if (res.ok) { const { url } = await res.json(); onChange({ profileImage: url }); toast.success(t("profile.uploadPhoto")); }
+    else toast.error(t("common.error"));
+    setUploading(false);
+  };
 
   const tenure = () => {
     if (!worker.startDate) return null;
-    const months = differenceInMonths(new Date(), new Date(worker.startDate));
-    const years = Math.floor(months / 12);
-    const rem = months % 12;
-    if (years > 0 && rem > 0) return t("profile.tenure", { years, months: rem });
-    if (years > 0) return t("profile.tenureYears", { years });
-    return t("profile.tenureMonths", { months: rem });
-  };
-
-  const handlePhotoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const fd = new FormData();
-    fd.append("file", file);
-    const res = await fetch(`/api/hr/workers/${worker.id}/photo`, { method: "POST", body: fd });
-    if (res.ok) {
-      const { url } = await res.json();
-      onWorkerUpdate({ ...worker, profileImage: url });
-      toast.success(t("profile.uploadPhoto"));
-    } else {
-      toast.error(t("common.error"));
-    }
+    const months = Math.floor((Date.now() - new Date(worker.startDate).getTime()) / (1000 * 60 * 60 * 24 * 30.44));
+    const y = Math.floor(months / 12); const m = months % 12;
+    if (y > 0 && m > 0) return t("profile.tenure", { years: y, months: m });
+    if (y > 0) return t("profile.tenureYears", { years: y });
+    return t("profile.tenureMonths", { months: m });
   };
 
   return (
-    <div className="flex items-start justify-between gap-4 flex-wrap">
-      <div className="flex items-center gap-4">
-        <div className="relative group">
-          <Avatar className="h-20 w-20">
-            {worker.profileImage && <AvatarImage src={worker.profileImage} />}
-            <AvatarFallback className="text-2xl font-bold">{initials}</AvatarFallback>
-          </Avatar>
-          <button onClick={() => fileRef.current?.click()} className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-            <Camera className="h-5 w-5 text-white" />
-          </button>
-          <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handlePhotoChange} />
-        </div>
-        <div>
-          <h1 className="text-2xl font-bold">{worker.firstName} {worker.lastName}</h1>
-          {worker.positionTitle && <p className="text-muted-foreground">{worker.positionTitle}</p>}
-          <div className="flex items-center gap-2 mt-1 flex-wrap">
-            <Badge className={`text-xs ${STATUS_COLORS[worker.status] ?? ""}`}>{t(`status.${worker.status}`)}</Badge>
-            {worker.employeeNumber && <span className="text-xs text-muted-foreground">#{worker.employeeNumber}</span>}
-            {tenure() && <span className="text-xs text-muted-foreground">{tenure()}</span>}
-          </div>
+    <div className="flex flex-col md:flex-row items-start md:items-center gap-4 p-6 border-b">
+      <div className="relative">
+        <Avatar className="h-20 w-20 cursor-pointer" onClick={() => fileRef.current?.click()}>
+          <AvatarImage src={worker.profileImage ?? undefined} />
+          <AvatarFallback className="text-lg font-bold">{initials}</AvatarFallback>
+        </Avatar>
+        <button onClick={() => fileRef.current?.click()} disabled={uploading} className="absolute bottom-0 right-0 h-6 w-6 rounded-full bg-primary text-white flex items-center justify-center">
+          <Camera className="h-3 w-3" />
+        </button>
+        <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handlePhoto} />
+      </div>
+      <div className="flex-1">
+        <h2 className="text-2xl font-bold">{worker.firstName} {worker.lastName}</h2>
+        <p className="text-muted-foreground">{worker.positionTitle ?? "—"} {worker.employeeNumber ? `· #${worker.employeeNumber}` : ""}</p>
+        {tenure() && <p className="text-xs text-muted-foreground mt-0.5">{tenure()}</p>}
+        <div className="flex items-center gap-2 mt-2 flex-wrap">
+          {editing ? (
+            <Select value={worker.status} onValueChange={(v) => onChange({ status: v })}>
+              <SelectTrigger className="w-36 h-7 text-xs"><SelectValue /></SelectTrigger>
+              <SelectContent>{STATUSES.map((s) => <SelectItem key={s} value={s}>{t(`status.${s}`)}</SelectItem>)}</SelectContent>
+            </Select>
+          ) : (
+            <Badge className={`text-xs ${STATUS_COLORS[worker.status] ?? ""}`} variant="outline">{t(`status.${worker.status}`)}</Badge>
+          )}
+          {worker.workerType && <Badge variant="outline" className="text-xs">{t(`workerType.${worker.workerType}`)}</Badge>}
         </div>
       </div>
-      {editing && (
-        <div className="flex gap-2">
-          <Button variant="outline" size="sm" onClick={onDiscard}><X className="h-4 w-4 mr-1" />{t("profile.discard")}</Button>
-          <Button size="sm" onClick={onSave}><Save className="h-4 w-4 mr-1" />{t("profile.saveAll")}</Button>
-        </div>
-      )}
+      <div className="flex items-center gap-2 flex-wrap">
+        {editing ? (
+          <>
+            <Button size="sm" onClick={onSave} disabled={saving}><Save className="h-3 w-3 mr-1" />{t("profile.saveAll")}</Button>
+            <Button size="sm" variant="outline" onClick={onDiscard}><X className="h-3 w-3 mr-1" />{t("profile.discard")}</Button>
+            <Button size="sm" variant="destructive" onClick={onDelete}><Trash2 className="h-3 w-3 mr-1" />{t("profile.delete")}</Button>
+          </>
+        ) : (
+          <Button size="sm" variant="outline" onClick={onDiscard}>{t("profile.editProfile")}</Button>
+        )}
+      </div>
     </div>
   );
 }
