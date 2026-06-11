@@ -1,5 +1,5 @@
 {
-  "name": "supplier-promo-simulation",
+  "name": "yango-internal-platform",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -44,6 +44,7 @@
     "sonner": "^1.5.0",
     "swr": "^2.2.5",
     "tailwind-merge": "^2.4.0",
+    "xlsx": "^0.18.5",
     "zod": "^3.23.8"
   },
   "devDependencies": {
