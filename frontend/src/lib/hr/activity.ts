@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 
 interface LogParams {
   workerId: string;
@@ -15,14 +16,16 @@ export async function logWorkerActivity(params: LogParams) {
   try {
     await prisma.workerActivity.create({
       data: {
-        workerId: params.workerId,
-        userId: params.userId,
-        type: params.type,
+        workerId:    params.workerId,
+        userId:      params.userId,
+        type:        params.type,
         description: params.description,
-        fieldName: params.fieldName ?? null,
-        oldValue: params.oldValue ?? null,
-        newValue: params.newValue ?? null,
-        metadata: params.metadata ?? undefined,
+        fieldName:   params.fieldName ?? null,
+        oldValue:    params.oldValue  ?? null,
+        newValue:    params.newValue  ?? null,
+        metadata:    params.metadata !== undefined
+          ? (params.metadata as Prisma.InputJsonValue)
+          : Prisma.JsonNull,
       },
     });
   } catch (err) {
