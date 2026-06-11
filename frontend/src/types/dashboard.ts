@@ -238,7 +238,6 @@ export const WIDGET_DEFINITIONS: WidgetDefinition[] = [
   },
 ];
 
-// Default layout seeds per role (12-col grid, react-grid-layout)
 export function getDefaultLayoutForRole(role: Role): DashboardLayout {
   const base: DashboardLayoutItem[] = [
     { i: "quick_stats",      x: 0, y: 0, w: 3, h: 2 },
@@ -270,7 +269,7 @@ export function getDefaultLayoutForRole(role: Role): DashboardLayout {
 }
 
 export const SUPPORTED_LANGUAGES: { code: SupportedLanguage; label: string; flag: string }[] = [
-  { code: "he", label: "\u05E2\u05D1\u05E8\u05D9\u05EA", flag: "\uD83C\uDDEE\uD83C\uDDF1" },
-  { code: "en", label: "English",   flag: "\uD83C\uDDEC\uD83C\uDDE7" },
-  { code: "ru", label: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439", flag: "\uD83C\uDDF7\uD83C\uDDFA" },
+  { code: "he", label: "עברית", flag: "🇮🇱" },
+  { code: "en", label: "English",  flag: "🇬🇧" },
+  { code: "ru", label: "Русский", flag: "🇷🇺" },
 ];

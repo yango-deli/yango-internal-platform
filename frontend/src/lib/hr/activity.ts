@@ -29,7 +29,6 @@ export async function logWorkerActivity(params: LogParams) {
       },
     });
   } catch (err) {
-    // Non-critical: log to console but don't fail the request
     console.error("[activity] Failed to log worker activity:", err);
   }
 }
