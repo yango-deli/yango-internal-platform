@@ -1,0 +1,169 @@
+{
+  "title": "Workers",
+  "addWorker": "Add Worker",
+  "searchPlaceholder": "Search by name, phone, ID…",
+  "filters": "Filters",
+  "exportExcel": "Export Excel",
+  "noWorkers": "No workers found",
+  "noWorkersDesc": "Try adjusting your filters or add a new worker",
+  "tabs": {
+    "personal": "Personal",
+    "employment": "Employment",
+    "salary": "Salary & Funds",
+    "documents": "Documents",
+    "equipment": "Equipment",
+    "career": "Career History",
+    "activity": "Activity Log"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "on_leave": "On Leave",
+    "terminated": "Terminated"
+  },
+  "workerType": {
+    "office": "Office",
+    "store": "Store",
+    "courier": "Courier"
+  },
+  "employmentType": {
+    "permanent": "Permanent",
+    "temporary": "Temporary",
+    "partial": "Part-time",
+    "contractor": "Contractor"
+  },
+  "vehicleType": {
+    "bike": "Bicycle",
+    "motorcycle": "Motorcycle",
+    "car": "Car"
+  },
+  "maritalStatus": {
+    "single": "Single",
+    "married": "Married",
+    "divorced": "Divorced",
+    "separated": "Separated",
+    "widowed": "Widowed"
+  },
+  "fields": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Phone",
+    "email": "Personal Email",
+    "workEmail": "Work Email",
+    "idNumber": "ID Number",
+    "dateOfBirth": "Date of Birth",
+    "address": "Address",
+    "city": "City",
+    "maritalStatus": "Marital Status",
+    "employeeNumber": "Employee Number",
+    "positionTitle": "Position Title",
+    "positionDesc": "Position Description",
+    "workerType": "Worker Type",
+    "employmentType": "Employment Type",
+    "jobScope": "Job Scope (%)",
+    "vehicleType": "Vehicle Type",
+    "vehicleNumber": "Vehicle Number",
+    "leadSource": "Lead Source",
+    "status": "Status",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "grossSalary": "Gross Salary",
+    "netSalary": "Net Salary",
+    "currency": "Currency",
+    "bankName": "Bank",
+    "bankBranch": "Branch",
+    "bankAccount": "Account Number",
+    "department": "Department",
+    "store": "Store",
+    "manager": "Manager"
+  },
+  "profile": {
+    "editProfile": "Edit",
+    "saveAll": "Save Changes",
+    "discard": "Discard",
+    "delete": "Delete Worker",
+    "deleteConfirm": "Are you sure you want to delete this worker? This action cannot be undone.",
+    "uploadPhoto": "Photo updated",
+    "manager": "Manager",
+    "viewCandidate": "View original candidate",
+    "recruitedVia": "Recruited via {{source}}",
+    "tenure": "{{years}}y {{months}}m",
+    "tenureYears": "{{years}}y",
+    "tenureMonths": "{{months}}m"
+  },
+  "salary": {
+    "banking": "Banking Details",
+    "grossNet": "Gross / Net Salary"
+  },
+  "documents": {
+    "contract": "Employment Contract",
+    "form101": "Form 101",
+    "idCopy": "ID Copy",
+    "nda": "NDA",
+    "certificates": "Certificates",
+    "vehicleLicense": "Vehicle License",
+    "drivingLicense": "Driving License",
+    "other": "Other Documents",
+    "uploadFile": "Upload",
+    "uploading": "Uploading…",
+    "noDocument": "No document uploaded",
+    "uploadedBy": "Uploaded by",
+    "previousVersions": "Previous versions"
+  },
+  "equipment": {
+    "title": "Assigned Equipment",
+    "assign": "Assign Equipment",
+    "noEquipment": "No equipment assigned",
+    "name": "Item Name",
+    "description": "Description",
+    "serialNumber": "Serial Number",
+    "assignedDate": "Assigned Date",
+    "status": {
+      "assigned": "Assigned",
+      "returned": "Returned",
+      "lost": "Lost"
+    }
+  },
+  "career": {
+    "addPosition": "Add Position",
+    "noHistory": "No career history",
+    "positionTitle": "Position Title",
+    "department": "Department / Store",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "notes": "Notes"
+  },
+  "activity": {
+    "noActivity": "No activity recorded",
+    "loadMore": "Load more",
+    "changedBy": "By",
+    "worker_created": "Worker profile created",
+    "field_updated": "{{field}} changed from «{{from}}» to «{{to}}»",
+    "status_changed": "Status changed to {{status}}",
+    "document_uploaded": "Document uploaded: {{title}}",
+    "document_replaced": "Document updated: {{title}} (v{{version}})",
+    "equipment_assigned": "Equipment assigned: {{name}}",
+    "equipment_returned": "Equipment returned: {{name}}"
+  },
+  "settings": {
+    "title": "HR Settings",
+    "departments": "Departments",
+    "stores": "Stores",
+    "permissions": "Field Permissions",
+    "addDepartment": "Add Department",
+    "departmentName": "Department name",
+    "addStore": "Add Store",
+    "storeName": "Store name",
+    "savePermissions": "Save Permissions",
+    "fieldKey": "Field Group",
+    "canView": "View",
+    "canEdit": "Edit"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "An error occurred. Please try again.",
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back"
+  }
+}
