@@ -5,7 +5,9 @@ export type SupportedLanguage = "he" | "en" | "ru";
 export type WidgetKey =
   | "outlook_mail"
   | "ms_todo"
+  | "ms_planner"
   | "outlook_calendar"
+  | "onedrive"
   | "announcements"
   | "shortcuts"
   | "quick_stats"
@@ -144,12 +146,12 @@ export interface RecentActivityItem {
 
 export interface WidgetDefinition {
   key: WidgetKey;
-  titleKey: string; // i18n key
+  titleKey: string;
   descriptionKey: string;
   defaultSize: WidgetSize;
   minW?: number;
   minH?: number;
-  roles: Role[]; // which roles can add/see by default
+  roles: Role[];
 }
 
 export const WIDGET_DEFINITIONS: WidgetDefinition[] = [
@@ -172,12 +174,30 @@ export const WIDGET_DEFINITIONS: WidgetDefinition[] = [
     roles: ["admin", "manager", "analyst", "viewer"],
   },
   {
+    key: "ms_planner",
+    titleKey: "widgets.ms_planner.title",
+    descriptionKey: "widgets.ms_planner.description",
+    defaultSize: "medium",
+    minW: 4,
+    minH: 3,
+    roles: ["admin", "manager", "analyst"],
+  },
+  {
     key: "outlook_calendar",
     titleKey: "widgets.outlook_calendar.title",
     descriptionKey: "widgets.outlook_calendar.description",
     defaultSize: "large",
     minW: 6,
     minH: 3,
+    roles: ["admin", "manager", "analyst", "viewer"],
+  },
+  {
+    key: "onedrive",
+    titleKey: "widgets.onedrive.title",
+    descriptionKey: "widgets.onedrive.description",
+    defaultSize: "medium",
+    minW: 3,
+    minH: 2,
     roles: ["admin", "manager", "analyst", "viewer"],
   },
   {
@@ -221,28 +241,27 @@ export const WIDGET_DEFINITIONS: WidgetDefinition[] = [
 // Default layout seeds per role (12-col grid, react-grid-layout)
 export function getDefaultLayoutForRole(role: Role): DashboardLayout {
   const base: DashboardLayoutItem[] = [
-    { i: "quick_stats", x: 0, y: 0, w: 3, h: 2 },
-    { i: "shortcuts", x: 3, y: 0, w: 6, h: 2 },
-    { i: "outlook_mail", x: 9, y: 0, w: 3, h: 4 },
-    { i: "ms_planner", x: 0, y: 2, w: 4, h: 4 },
+    { i: "quick_stats",      x: 0, y: 0, w: 3, h: 2 },
+    { i: "shortcuts",        x: 3, y: 0, w: 6, h: 2 },
+    { i: "outlook_mail",     x: 9, y: 0, w: 3, h: 4 },
+    { i: "ms_planner",       x: 0, y: 2, w: 4, h: 4 },
     { i: "outlook_calendar", x: 4, y: 2, w: 5, h: 4 },
-    { i: "onedrive", x: 9, y: 4, w: 3, h: 3 },
-    { i: "announcements", x: 0, y: 6, w: 6, h: 4 },
-    { i: "recent_activity", x: 6, y: 6, w: 6, h: 4 },
+    { i: "onedrive",         x: 9, y: 4, w: 3, h: 3 },
+    { i: "announcements",    x: 0, y: 6, w: 6, h: 4 },
+    { i: "recent_activity",  x: 6, y: 6, w: 6, h: 4 },
   ];
 
-  // Admins get slightly different emphasis
   if (role === "admin") {
     return {
       lg: [
-        { i: "quick_stats", x: 0, y: 0, w: 4, h: 2 },
-        { i: "shortcuts", x: 4, y: 0, w: 5, h: 2 },
-        { i: "outlook_mail", x: 9, y: 0, w: 3, h: 4 },
-        { i: "ms_planner", x: 0, y: 2, w: 4, h: 4 },
+        { i: "quick_stats",      x: 0, y: 0, w: 4, h: 2 },
+        { i: "shortcuts",        x: 4, y: 0, w: 5, h: 2 },
+        { i: "outlook_mail",     x: 9, y: 0, w: 3, h: 4 },
+        { i: "ms_planner",       x: 0, y: 2, w: 4, h: 4 },
         { i: "outlook_calendar", x: 4, y: 2, w: 5, h: 4 },
-        { i: "onedrive", x: 9, y: 4, w: 3, h: 3 },
-        { i: "announcements", x: 0, y: 6, w: 6, h: 4 },
-        { i: "recent_activity", x: 6, y: 6, w: 6, h: 4 },
+        { i: "onedrive",         x: 9, y: 4, w: 3, h: 3 },
+        { i: "announcements",    x: 0, y: 6, w: 6, h: 4 },
+        { i: "recent_activity",  x: 6, y: 6, w: 6, h: 4 },
       ],
     };
   }
@@ -251,7 +270,7 @@ export function getDefaultLayoutForRole(role: Role): DashboardLayout {
 }
 
 export const SUPPORTED_LANGUAGES: { code: SupportedLanguage; label: string; flag: string }[] = [
-  { code: "he", label: "עברית", flag: "🇮🇱" },
-  { code: "en", label: "English", flag: "🇬🇧" },
-  { code: "ru", label: "Русский", flag: "🇷🇺" },
+  { code: "he", label: "\u05E2\u05D1\u05E8\u05D9\u05EA", flag: "\uD83C\uDDEE\uD83C\uDDF1" },
+  { code: "en", label: "English",   flag: "\uD83C\uDDEC\uD83C\uDDE7" },
+  { code: "ru", label: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439", flag: "\uD83C\uDDF7\uD83C\uDDFA" },
 ];
