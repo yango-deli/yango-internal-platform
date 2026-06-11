@@ -7,32 +7,46 @@ export default withAuth(
     const { pathname } = req.nextUrl;
     const token = req.nextauth.token;
 
-    // Relaxed auth for local preview ("just to see" the new dashboard)
     if (process.env.NODE_ENV === "development" && pathname.startsWith("/dashboard")) {
       return NextResponse.next();
     }
 
     if (token?.error === "AccountDisabled") {
-      return NextResponse.redirect(
-        new URL("/login?error=AccountDisabled", req.url)
-      );
+      return NextResponse.redirect(new URL("/login?error=AccountDisabled", req.url));
     }
 
     // /users — admin only
     if (pathname.startsWith("/users") && token?.role !== Role.admin) {
-      return NextResponse.redirect(
-        new URL("/dashboard?error=Unauthorized", req.url)
-      );
+      return NextResponse.redirect(new URL("/dashboard?error=Unauthorized", req.url));
     }
 
-    // /simulation — analyst, manager, admin
+    // /admin — admin only
+    if (pathname.startsWith("/admin") && token?.role !== Role.admin) {
+      return NextResponse.redirect(new URL("/dashboard?error=Unauthorized", req.url));
+    }
+
+    // /hr — manager, admin, hr (not viewer)
+    if (pathname.startsWith("/hr") && token?.role === Role.viewer) {
+      return NextResponse.redirect(new URL("/dashboard?error=Unauthorized", req.url));
+    }
+
+    // /hr/settings — admin only
+    if (pathname.startsWith("/hr/settings") && token?.role !== Role.admin) {
+      return NextResponse.redirect(new URL("/hr?error=Unauthorized", req.url));
+    }
+
+    // /simulation — analyst, manager, admin (not viewer)
+    if (pathname.startsWith("/simulation") && token?.role === Role.viewer) {
+      return NextResponse.redirect(new URL("/dashboard?error=Unauthorized", req.url));
+    }
+
+    // /recruitment — manager, admin (not viewer or analyst)
     if (
-      pathname.startsWith("/simulation") &&
-      token?.role === Role.viewer
+      pathname.startsWith("/recruitment") &&
+      token?.role !== Role.admin &&
+      token?.role !== Role.manager
     ) {
-      return NextResponse.redirect(
-        new URL("/dashboard?error=Unauthorized", req.url)
-      );
+      return NextResponse.redirect(new URL("/dashboard?error=Unauthorized", req.url));
     }
 
     return NextResponse.next();
@@ -40,7 +54,6 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ token }) => {
-        // In development, allow dashboard even without token
         if (process.env.NODE_ENV === "development") return true;
         return !!token;
       },
@@ -55,7 +68,11 @@ export const config = {
     "/simulation/:path*",
     "/users/:path*",
     "/admin/:path*",
+    "/hr/:path*",
+    "/recruitment/:path*",
     "/api/simulate/:path*",
     "/api/users/:path*",
+    "/api/hr/:path*",
+    "/api/recruitment/:path*",
   ],
 };
