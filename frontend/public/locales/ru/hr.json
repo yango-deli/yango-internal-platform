@@ -3,6 +3,7 @@
   "addWorker": "Добавить сотрудника",
   "searchPlaceholder": "Поиск по имени, телефону, ID…",
   "filters": "Фильтры",
+  "clearAll": "Сбросить всё",
   "exportExcel": "Экспорт Excel",
   "noWorkers": "Сотрудники не найдены",
   "noWorkersDesc": "Попробуйте изменить фильтры или добавить нового сотрудника",
@@ -18,7 +19,8 @@
   "documents": { "contract": "Трудовой договор", "form101": "Форма 101", "idCopy": "Копия удостоверения", "nda": "Соглашение о неразглашении", "certificates": "Сертификаты", "vehicleLicense": "Документы на транспорт", "drivingLicense": "Водительское удостоверение", "other": "Прочие документы", "uploadFile": "Загрузить", "uploading": "Загрузка…", "noDocument": "Документ не загружен", "uploadedBy": "Загрузил", "previousVersions": "Предыдущие версии" },
   "equipment": { "title": "Выданное оборудование", "assign": "Выдать оборудование", "noEquipment": "Оборудование не выдано", "name": "Название", "description": "Описание", "serialNumber": "Серийный номер", "assignedDate": "Дата выдачи", "status": { "assigned": "Выдано", "returned": "Возвращено", "lost": "Потеряно" } },
   "career": { "addPosition": "Добавить должность", "noHistory": "История карьеры отсутствует", "positionTitle": "Название должности", "department": "Отдел / Магазин", "startDate": "Дата начала", "endDate": "Дата окончания", "notes": "Примечания" },
-  "activity": { "noActivity": "Активность не зафиксирована", "loadMore": "Загрузить ещё", "changedBy": "Кем", "worker_created": "Профиль сотрудника создан", "field_updated": "Поле {{field}} изменено с «{{from}}» на «{{to}}»", "status_changed": "Статус изменён на {{status}}", "document_uploaded": "Документ загружен: {{title}}", "document_replaced": "Документ обновлён: {{title}} (v{{version}})", "equipment_assigned": "Выдано оборудование: {{name}}", "equipment_returned": "Оборудование возвращено: {{name}}" },
+  "activity": { "noActivity": "Активность не зафиксирована", "loadMore": "Загрузить ещё", "changedBy": "Кем", "worker_created": "Профиль сотрудника создан", "field_updated": "Поле {{field}} изменено с \u00ab{{from}}\u00bb на \u00ab{{to}}\u00bb", "status_changed": "Статус изменён на {{status}}", "document_uploaded": "Документ загружен: {{title}}", "document_replaced": "Документ обновлён: {{title}} (v{{version}})", "equipment_assigned": "Выдано оборудование: {{name}}", "equipment_returned": "Оборудование возвращено: {{name}}" },
   "settings": { "title": "Настройки HR", "departments": "Отделы", "stores": "Магазины", "permissions": "Разрешения полей", "addDepartment": "Добавить отдел", "departmentName": "Название отдела", "addStore": "Добавить магазин", "storeName": "Название магазина", "savePermissions": "Сохранить разрешения", "fieldKey": "Группа полей", "canView": "Просмотр", "canEdit": "Редактирование" },
+  "stats": { "total": "Всего сотрудников", "active": "Активных", "onLeave": "В отпуске", "terminated": "Уволенных" },
   "common": { "loading": "Загрузка…", "error": "Произошла ошибка. Попробуйте ещё раз.", "save": "Сохранить", "cancel": "Отмена", "back": "Назад" }
 }

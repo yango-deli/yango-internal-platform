@@ -3,6 +3,7 @@
   "addWorker": "Add Worker",
   "searchPlaceholder": "Search by name, phone, ID…",
   "filters": "Filters",
+  "clearAll": "Clear all",
   "exportExcel": "Export Excel",
   "noWorkers": "No workers found",
   "noWorkersDesc": "Try adjusting your filters or add a new worker",
@@ -18,7 +19,8 @@
   "documents": { "contract": "Employment Contract", "form101": "Form 101", "idCopy": "ID Copy", "nda": "NDA", "certificates": "Certificates", "vehicleLicense": "Vehicle License", "drivingLicense": "Driving License", "other": "Other Documents", "uploadFile": "Upload", "uploading": "Uploading…", "noDocument": "No document uploaded", "uploadedBy": "Uploaded by", "previousVersions": "Previous versions" },
   "equipment": { "title": "Assigned Equipment", "assign": "Assign Equipment", "noEquipment": "No equipment assigned", "name": "Item Name", "description": "Description", "serialNumber": "Serial Number", "assignedDate": "Assigned Date", "status": { "assigned": "Assigned", "returned": "Returned", "lost": "Lost" } },
   "career": { "addPosition": "Add Position", "noHistory": "No career history", "positionTitle": "Position Title", "department": "Department / Store", "startDate": "Start Date", "endDate": "End Date", "notes": "Notes" },
-  "activity": { "noActivity": "No activity recorded", "loadMore": "Load more", "changedBy": "By", "worker_created": "Worker profile created", "field_updated": "{{field}} changed from «{{from}}» to «{{to}}»", "status_changed": "Status changed to {{status}}", "document_uploaded": "Document uploaded: {{title}}", "document_replaced": "Document updated: {{title}} (v{{version}})", "equipment_assigned": "Equipment assigned: {{name}}", "equipment_returned": "Equipment returned: {{name}}" },
+  "activity": { "noActivity": "No activity recorded", "loadMore": "Load more", "changedBy": "By", "worker_created": "Worker profile created", "field_updated": "{{field}} changed from \u00ab{{from}}\u00bb to \u00ab{{to}}\u00bb", "status_changed": "Status changed to {{status}}", "document_uploaded": "Document uploaded: {{title}}", "document_replaced": "Document updated: {{title}} (v{{version}})", "equipment_assigned": "Equipment assigned: {{name}}", "equipment_returned": "Equipment returned: {{name}}" },
   "settings": { "title": "HR Settings", "departments": "Departments", "stores": "Stores", "permissions": "Field Permissions", "addDepartment": "Add Department", "departmentName": "Department name", "addStore": "Add Store", "storeName": "Store name", "savePermissions": "Save Permissions", "fieldKey": "Field Group", "canView": "View", "canEdit": "Edit" },
+  "stats": { "total": "Total Workers", "active": "Active", "onLeave": "On Leave", "terminated": "Terminated" },
   "common": { "loading": "Loading…", "error": "An error occurred. Please try again.", "save": "Save", "cancel": "Cancel", "back": "Back" }
 }
