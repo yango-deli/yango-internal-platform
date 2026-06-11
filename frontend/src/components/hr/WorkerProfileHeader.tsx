@@ -1,75 +1,81 @@
 "use client";
-import { useRef, useState } from "react";
 import { useTranslation } from "next-i18next";
+import { useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Camera } from "lucide-react";
+import { Camera, Save, X } from "lucide-react";
 import { toast } from "sonner";
-import { differenceInDays, differenceInMonths, differenceInYears } from "date-fns";
-
-interface Props { worker: any; onUpdate: () => void; }
+import { differenceInMonths } from "date-fns";
 
 const STATUS_COLORS: Record<string, string> = {
-  active: "bg-green-100 text-green-800",
-  inactive: "bg-gray-100 text-gray-700",
-  on_leave: "bg-yellow-100 text-yellow-800",
-  terminated: "bg-red-100 text-red-800",
+  active: "bg-green-100 text-green-800 border-green-200",
+  inactive: "bg-gray-100 text-gray-600 border-gray-200",
+  on_leave: "bg-yellow-100 text-yellow-800 border-yellow-200",
+  terminated: "bg-red-100 text-red-800 border-red-200",
 };
 
-function getTenure(t: any, startDate: string | null): string {
-  if (!startDate) return "";
-  const start = new Date(startDate);
-  const now = new Date();
-  const years = differenceInYears(now, start);
-  if (years > 0) return t("tenure.years_other", { count: years });
-  const months = differenceInMonths(now, start);
-  if (months > 0) return t("tenure.months_other", { count: months });
-  const days = differenceInDays(now, start);
-  if (days === 0) return t("tenure.today");
-  return t("tenure.days_other", { count: days });
-}
+interface Props { worker: any; editing: boolean; onSave: () => void; onDiscard: () => void; onWorkerUpdate: (w: any) => void; }
 
-export function WorkerProfileHeader({ worker, onUpdate }: Props) {
+export function WorkerProfileHeader({ worker, editing, onSave, onDiscard, onWorkerUpdate }: Props) {
   const { t } = useTranslation("hr");
   const fileRef = useRef<HTMLInputElement>(null);
-  const [uploading, setUploading] = useState(false);
+  const initials = `${worker.firstName?.[0] ?? ""}${worker.lastName?.[0] ?? ""}`.toUpperCase();
 
-  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const tenure = () => {
+    if (!worker.startDate) return null;
+    const months = differenceInMonths(new Date(), new Date(worker.startDate));
+    const years = Math.floor(months / 12);
+    const rem = months % 12;
+    if (years > 0 && rem > 0) return t("profile.tenure", { years, months: rem });
+    if (years > 0) return t("profile.tenureYears", { years });
+    return t("profile.tenureMonths", { months: rem });
+  };
+
+  const handlePhotoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setUploading(true);
     const fd = new FormData();
     fd.append("file", file);
     const res = await fetch(`/api/hr/workers/${worker.id}/photo`, { method: "POST", body: fd });
-    if (res.ok) { toast.success("Photo updated"); onUpdate(); }
-    else toast.error(t("common.error"));
-    setUploading(false);
+    if (res.ok) {
+      const { url } = await res.json();
+      onWorkerUpdate({ ...worker, profileImage: url });
+      toast.success(t("profile.uploadPhoto"));
+    } else {
+      toast.error(t("common.error"));
+    }
   };
 
-  const initials = `${worker.firstName?.[0] ?? ""}${worker.lastName?.[0] ?? ""}`.toUpperCase();
-
   return (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-xl border bg-card">
-      <div className="relative group">
-        <Avatar className="h-20 w-20">
-          <AvatarImage src={worker.profileImage} />
-          <AvatarFallback className="text-xl bg-primary/10 text-primary font-bold">{initials}</AvatarFallback>
-        </Avatar>
-        <Button size="icon" variant="secondary" className="absolute bottom-0 right-0 h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => fileRef.current?.click()} disabled={uploading}>
-          <Camera className="h-3 w-3" />
-        </Button>
-        <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handlePhotoUpload} />
-      </div>
-      <div className="flex-1 space-y-1">
-        <h2 className="text-xl font-bold">{worker.firstName} {worker.lastName}</h2>
-        <p className="text-muted-foreground">{worker.positionTitle ?? "\u2014"} {worker.employeeNumber ? `\u00b7 #${worker.employeeNumber}` : ""}</p>
-        <div className="flex flex-wrap gap-2">
-          <Badge className={STATUS_COLORS[worker.status]}>{t(`status.${worker.status}`)}</Badge>
-          {worker.workerType && <Badge variant="outline">{t(`workerType.${worker.workerType}`)}</Badge>}
-          {worker.startDate && <Badge variant="secondary">{getTenure(t, worker.startDate)}</Badge>}
+    <div className="flex items-start justify-between gap-4 flex-wrap">
+      <div className="flex items-center gap-4">
+        <div className="relative group">
+          <Avatar className="h-20 w-20">
+            {worker.profileImage && <AvatarImage src={worker.profileImage} />}
+            <AvatarFallback className="text-2xl font-bold">{initials}</AvatarFallback>
+          </Avatar>
+          <button onClick={() => fileRef.current?.click()} className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+            <Camera className="h-5 w-5 text-white" />
+          </button>
+          <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handlePhotoChange} />
+        </div>
+        <div>
+          <h1 className="text-2xl font-bold">{worker.firstName} {worker.lastName}</h1>
+          {worker.positionTitle && <p className="text-muted-foreground">{worker.positionTitle}</p>}
+          <div className="flex items-center gap-2 mt-1 flex-wrap">
+            <Badge className={`text-xs ${STATUS_COLORS[worker.status] ?? ""}`}>{t(`status.${worker.status}`)}</Badge>
+            {worker.employeeNumber && <span className="text-xs text-muted-foreground">#{worker.employeeNumber}</span>}
+            {tenure() && <span className="text-xs text-muted-foreground">{tenure()}</span>}
+          </div>
         </div>
       </div>
+      {editing && (
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" onClick={onDiscard}><X className="h-4 w-4 mr-1" />{t("profile.discard")}</Button>
+          <Button size="sm" onClick={onSave}><Save className="h-4 w-4 mr-1" />{t("profile.saveAll")}</Button>
+        </div>
+      )}
     </div>
   );
 }
