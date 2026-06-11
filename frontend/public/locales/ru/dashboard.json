@@ -121,6 +121,10 @@
       "title": "Встраивание (Iframe)",
       "description": "Встройте любую веб-страницу или внутренний инструмент"
     },
+    "onedrive": {
+      "title": "OneDrive",
+      "description": "Недавние файлы из Microsoft 365 (автосинхронизация)"
+    },
     "ai_bar": {
       "placeholder": "Спросите ИИ...",
       "secure": "Безопасный ИИ",

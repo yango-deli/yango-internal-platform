@@ -134,7 +134,7 @@ export default function UserSettingsPage() {
         <CardHeader><CardTitle>Integrations</CardTitle></CardHeader>
         <CardContent className="space-y-4">
           <p className="text-sm text-gray-600">
-            Because you logged in with Microsoft Entra (Azure AD), many Microsoft services are automatically available via your access token (Mail, Calendar, Planner, etc.).
+            Because you logged in with Microsoft Entra (Azure AD), many Microsoft services are automatically available via your access token (Mail, Calendar, Planner, OneDrive, Teams, Directory). No extra login required.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">

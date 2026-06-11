@@ -31,6 +31,7 @@ import { QuickStatsWidget } from "@/components/dashboard/widgets/QuickStatsWidge
 import { RecentActivityWidget } from "@/components/dashboard/widgets/RecentActivityWidget";
 import { PlannerWidget } from "@/components/dashboard/widgets/PlannerWidget"; // replaces old Todo
 import { IframeWidget } from "@/components/dashboard/widgets/IframeWidget"; // NEW - for custom iframes
+import { OneDriveWidget } from "@/components/dashboard/widgets/OneDriveWidget"; // Auto via Entra SSO
 
 export type WidgetKey = string; // Now more open for custom:iframe:xxx etc.
 
@@ -148,6 +149,19 @@ export const WIDGET_DEFINITIONS: WidgetDefinition[] = [
     category: "custom",
     isCustom: true,
   },
+  // Auto Microsoft integration via Entra SSO (no extra login)
+  {
+    key: "onedrive",
+    titleKey: "widgets.onedrive.title",
+    descriptionKey: "widgets.onedrive.description",
+    defaultSize: "medium",
+    minW: 4,
+    minH: 3,
+    resizable: true,
+    roles: ["admin", "manager", "analyst", "viewer"],
+    category: "microsoft",
+    requiresIntegration: "microsoft",
+  },
 ];
 
 export const WIDGET_COMPONENTS: Record<string, ComponentType<any>> = {
@@ -159,6 +173,7 @@ export const WIDGET_COMPONENTS: Record<string, ComponentType<any>> = {
   quick_stats: QuickStatsWidget,
   recent_activity: RecentActivityWidget,
   custom_iframe: IframeWidget,
+  onedrive: OneDriveWidget,
   // Fallback for old "ms_todo" keys during migration
   ms_todo: PlannerWidget,
 };
@@ -181,6 +196,8 @@ export function isWidgetEnabled(key: string, enabledList?: string[]): boolean {
 export function getSystemShortcutSuggestions(role: Role): Array<{ title: string; url: string; icon: string }> {
   const base = [
     { title: "My Workspace", url: "/dashboard", icon: "🏠" },
+    { title: "Microsoft Teams", url: "https://teams.microsoft.com", icon: "💬" }, // Auto M365 link
+    { title: "OneDrive", url: "https://onedrive.live.com", icon: "☁️" },
   ];
 
   if (["admin", "manager", "analyst"].includes(role)) {

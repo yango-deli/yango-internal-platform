@@ -121,6 +121,10 @@
       "title": "Custom Embed (Iframe)",
       "description": "Embed any web page or internal tool"
     },
+    "onedrive": {
+      "title": "OneDrive",
+      "description": "Recent files from Microsoft 365 (auto-synced)"
+    },
     "ai_bar": {
       "placeholder": "Ask AI anything...",
       "secure": "Secure AI",

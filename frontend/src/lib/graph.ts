@@ -183,3 +183,85 @@ export async function updatePlannerTaskProgress(accessToken: string, taskId: str
     body: JSON.stringify({ percentComplete }),
   });
 }
+
+// ==================== Auto Microsoft Integrations via Entra SSO ====================
+// These leverage the same accessToken from Azure AD login. No extra OAuth needed
+// if the app registration has the scopes (see auth.ts). Admin can grant consent.
+
+export interface OneDriveFile {
+  id: string;
+  name: string;
+  webUrl: string;
+  lastModifiedDateTime?: string;
+  size?: number;
+}
+
+export async function getMyRecentOneDriveFiles(accessToken: string, top = 8) {
+  // Recent files the user interacted with
+  const path = `/me/drive/recent?$top=${top}&$select=id,name,webUrl,lastModifiedDateTime,size`;
+  const res = await graphFetch<{ value: any[] }>(accessToken, path);
+  if (res.error || !res.data?.value) {
+    return { error: res.error || "no_onedrive", status: res.status };
+  }
+  const files: OneDriveFile[] = res.data.value.map((f: any) => ({
+    id: f.id,
+    name: f.name,
+    webUrl: f.webUrl,
+    lastModifiedDateTime: f.lastModifiedDateTime,
+    size: f.size,
+  }));
+  return { data: files };
+}
+
+export interface Team {
+  id: string;
+  displayName: string;
+  webUrl?: string;
+}
+
+export async function getMyTeams(accessToken: string) {
+  const path = `/me/joinedTeams?$select=id,displayName,webUrl`;
+  const res = await graphFetch<{ value: any[] }>(accessToken, path);
+  if (res.error || !res.data?.value) return { error: res.error || "no_teams" };
+  const teams: Team[] = res.data.value.map((t: any) => ({
+    id: t.id,
+    displayName: t.displayName,
+    webUrl: t.webUrl,
+  }));
+  return { data: teams };
+}
+
+export interface Presence {
+  availability: string;
+  activity: string;
+}
+
+export async function getMyPresence(accessToken: string) {
+  const path = `/me/presence`;
+  const res = await graphFetch<Presence>(accessToken, path);
+  return res;
+}
+
+export interface DirectoryUser {
+  id: string;
+  displayName?: string;
+  mail?: string;
+  jobTitle?: string;
+}
+
+export async function searchDirectoryUsers(accessToken: string, query: string, top = 5) {
+  if (!query || query.length < 2) return { data: [] };
+  const path = `/users?$search="displayName:${query}" OR "mail:${query}"&$top=${top}&$select=id,displayName,mail,jobTitle`;
+  // Note: /users search requires ConsistencyLevel: eventual header in some tenants
+  const res = await graphFetch<{ value: any[] }>(accessToken, path, {
+    headers: { ConsistencyLevel: "eventual" },
+  });
+  if (res.error || !res.data?.value) return { error: res.error, data: [] };
+  const users: DirectoryUser[] = res.data.value.map((u: any) => ({
+    id: u.id,
+    displayName: u.displayName,
+    mail: u.mail,
+    jobTitle: u.jobTitle,
+  }));
+  return { data: users };
+}

@@ -8,9 +8,14 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  // Microsoft is auto-connected via the Entra SSO login + accessToken
+  // Microsoft is auto-connected via the Entra SSO login + accessToken (no extra OAuth).
+  // Services are auto-detected / synced (Mail, Calendar, Planner, OneDrive, Teams, Directory search).
   const items = [
-    { provider: "microsoft", connected: true, services: ["mail", "calendar", "planner", "onedrive"] },
+    {
+      provider: "microsoft",
+      connected: true,
+      services: ["mail", "calendar", "planner", "onedrive", "teams", "directory"],
+    },
   ];
 
   return NextResponse.json({ items });

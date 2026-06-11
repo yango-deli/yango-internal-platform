@@ -34,7 +34,7 @@ export const authOptions: NextAuthOptions = {
       allowDangerousEmailAccountLinking: true,
       authorization: {
         params: {
-          scope: "openid profile email User.Read Mail.Read Tasks.ReadWrite Calendars.Read",
+          scope: "openid profile email User.Read Mail.Read Tasks.ReadWrite Calendars.Read Files.Read.All Sites.Read.All Presence.Read Team.ReadBasic.All User.Read.All Directory.Read.All",
         },
       },
     }),

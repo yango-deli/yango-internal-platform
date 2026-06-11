@@ -121,6 +121,10 @@
       "title": "הטמעה מותאמת (Iframe)",
       "description": "הטמע כל דף או כלי פנימי"
     },
+    "onedrive": {
+      "title": "OneDrive",
+      "description": "קבצים אחרונים מ-Microsoft 365 (מסונכרן אוטומטית)"
+    },
     "ai_bar": {
       "placeholder": "שאל את ה-AI...",
       "secure": "AI מאובטח",
