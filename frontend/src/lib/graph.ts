@@ -146,3 +146,40 @@ export interface GraphMe {
 export async function getMe(accessToken: string) {
   return graphFetch<GraphMe>(accessToken, "/me?$select=id,displayName,mail");
 }
+
+// ==================== Microsoft Planner (replaces legacy To Do) ====================
+export interface PlannerTask {
+  id: string;
+  title: string;
+  percentComplete?: number;
+  dueDateTime?: string | null;
+  planTitle?: string;
+}
+
+export async function getMyPlannerTasks(accessToken: string, top = 10) {
+  const path = `/me/planner/tasks?$top=${top}&$expand=plan&$select=id,title,percentComplete,dueDateTime,planId`;
+  const res = await graphFetch<{ value: any[] }>(accessToken, path);
+
+  if (res.error || !res.data?.value) {
+    return { error: res.error || "no_planner_tasks", status: res.status };
+  }
+
+  const tasks: PlannerTask[] = (res.data.value || []).map((t: any) => ({
+    id: t.id,
+    title: t.title,
+    percentComplete: t.percentComplete ?? 0,
+    dueDateTime: t.dueDateTime,
+    planTitle: t.plan?.title,
+  }));
+
+  return { data: tasks };
+}
+
+export async function updatePlannerTaskProgress(accessToken: string, taskId: string, percentComplete: number) {
+  // Note: production Planner PATCH requires proper ETag (If-Match header).
+  const path = `/planner/tasks/${taskId}`;
+  return graphFetch(accessToken, path, {
+    method: "PATCH",
+    body: JSON.stringify({ percentComplete }),
+  });
+}

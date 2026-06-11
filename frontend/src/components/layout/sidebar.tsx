@@ -20,6 +20,12 @@ const navItems = [
     roles: [Role.admin, Role.manager, Role.analyst, Role.viewer],
   },
   {
+    label: "Settings",
+    href: "/settings",
+    icon: Users, // reuse for simplicity; could import Settings icon
+    roles: [Role.admin, Role.manager, Role.analyst, Role.viewer],
+  },
+  {
     label: "Simulation",
     href: "/simulation",
     icon: FlaskConical,

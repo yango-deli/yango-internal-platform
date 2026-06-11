@@ -109,6 +109,28 @@
         "date": "Date",
         "tiers": "Tiers"
       }
+    },
+    "ms_planner": {
+      "title": "Microsoft Planner",
+      "description": "Tasks from your Planner plans",
+      "empty": "No Planner tasks assigned",
+      "connectCta": "Connect Planner",
+      "error": "Could not load Planner tasks"
+    },
+    "custom_iframe": {
+      "title": "Custom Embed (Iframe)",
+      "description": "Embed any web page or internal tool"
+    },
+    "ai_bar": {
+      "placeholder": "Ask AI anything...",
+      "secure": "Secure AI",
+      "external": "External AI",
+      "send": "Send"
+    },
+    "search": {
+      "placeholder": "Search...",
+      "internal": "Internal",
+      "google": "Google"
     }
   },
   "editMode": {

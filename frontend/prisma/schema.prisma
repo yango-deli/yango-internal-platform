@@ -57,6 +57,7 @@ model User {
   shortcuts         UserShortcut[]
   widgetConfigs     UserWidgetConfig[]
   announcements     CompanyAnnouncement[]  // authored announcements
+  integrations      UserIntegration[]
   createdAt         DateTime               @default(now())
   updatedAt         DateTime               @updatedAt
 }
@@ -80,13 +81,16 @@ model SimulationRun {
 }
 
 model UserSettings {
-  id        String   @id @default(cuid())
-  userId    String   @unique
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  language  String   @default("he")    // "he" | "en" | "ru"
-  theme     String   @default("light") // "light" | "dark" | "system"
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  language           String   @default("he")    // "he" | "en" | "ru"
+  theme              String   @default("light") // "light" | "dark" | "system"
+  background         String?                     // e.g. "color:#f8fafc" | "image:https://..." | "gradient:linear-gradient(...)"
+  aiMode             String   @default("secure") // "secure" | "external"
+  searchPreference   String   @default("internal") // "internal" | "google"
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 }
 
 model UserDashboardLayout {
@@ -137,4 +141,34 @@ model CompanyAnnouncement {
   expiresAt   DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+model UserIntegration {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provider      String   // "microsoft", "google", "slack", etc. Microsoft auto-synced via Entra SSO
+  connected     Boolean  @default(true)
+  metadata      Json?    // e.g. { services: ["mail", "planner", "calendar"] }
+  lastSyncedAt  DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model AiProviderConfig {
+  id          String   @id @default(cuid())
+  provider    String   // "openai", "grok", "azure-openai", "internal-secure-proxy"
+  apiKey      String?  @db.Text
+  endpoint    String?
+  isEnabled   Boolean  @default(true)
+  isSecure    Boolean  @default(false) // true = "Secure AI" option
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SystemConfig {
+  key   String @id
+  value Json
+  // Used for admin-managed feature flags, enabled widgets, etc.
+  // Example key: "enabledWidgets" value: ["outlook_mail", "shortcuts", "iframe"]
 }

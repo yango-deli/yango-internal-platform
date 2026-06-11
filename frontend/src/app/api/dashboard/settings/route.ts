@@ -34,12 +34,21 @@ export async function PATCH(req: NextRequest) {
   const userId = session.user.id;
   const body = await req.json().catch(() => ({}));
 
-  const data: { language?: SupportedLanguage; theme?: string } = {};
+  const data: any = {};
   if (body.language && ["he", "en", "ru"].includes(body.language)) {
     data.language = body.language;
   }
   if (body.theme && ["light", "dark", "system"].includes(body.theme)) {
     data.theme = body.theme;
+  }
+  if (typeof body.background === "string") {
+    data.background = body.background;
+  }
+  if (body.aiMode && ["secure", "external"].includes(body.aiMode)) {
+    data.aiMode = body.aiMode;
+  }
+  if (body.searchPreference && ["internal", "google"].includes(body.searchPreference)) {
+    data.searchPreference = body.searchPreference;
   }
 
   if (Object.keys(data).length === 0) {

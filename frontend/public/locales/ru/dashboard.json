@@ -109,6 +109,28 @@
         "date": "Дата",
         "tiers": "Уровни"
       }
+    },
+    "ms_planner": {
+      "title": "Microsoft Planner",
+      "description": "Задачи из ваших планов Planner",
+      "empty": "Нет назначенных задач в Planner",
+      "connectCta": "Подключить Planner",
+      "error": "Не удалось загрузить задачи Planner"
+    },
+    "custom_iframe": {
+      "title": "Встраивание (Iframe)",
+      "description": "Встройте любую веб-страницу или внутренний инструмент"
+    },
+    "ai_bar": {
+      "placeholder": "Спросите ИИ...",
+      "secure": "Безопасный ИИ",
+      "external": "Внешний ИИ",
+      "send": "Отправить"
+    },
+    "search": {
+      "placeholder": "Поиск...",
+      "internal": "Внутри",
+      "google": "Google"
     }
   },
   "editMode": {

@@ -109,6 +109,28 @@
         "date": "תאריך",
         "tiers": "שכבות"
       }
+    },
+    "ms_planner": {
+      "title": "Microsoft Planner",
+      "description": "משימות מתוכניות ה-Planner שלך",
+      "empty": "אין משימות מוקצות ב-Planner",
+      "connectCta": "התחבר ל-Planner",
+      "error": "לא ניתן לטעון משימות Planner"
+    },
+    "custom_iframe": {
+      "title": "הטמעה מותאמת (Iframe)",
+      "description": "הטמע כל דף או כלי פנימי"
+    },
+    "ai_bar": {
+      "placeholder": "שאל את ה-AI...",
+      "secure": "AI מאובטח",
+      "external": "AI חיצוני",
+      "send": "שלח"
+    },
+    "search": {
+      "placeholder": "חפש...",
+      "internal": "פנימי",
+      "google": "Google"
     }
   },
   "editMode": {
