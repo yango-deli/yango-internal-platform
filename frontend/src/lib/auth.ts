@@ -16,9 +16,17 @@ const baseAdapter = PrismaAdapter(prisma);
 const patchedAdapter = {
   ...baseAdapter,
   linkAccount: (account: AdapterAccount) => {
-    const { userId, type, provider, providerAccountId, refresh_token, access_token, expires_at, token_type, scope, id_token, session_state } = account;
+    const {
+      userId, type, provider, providerAccountId,
+      refresh_token, access_token, expires_at,
+      token_type, scope, id_token, session_state,
+    } = account;
     return prisma.account.create({
-      data: { userId, type, provider, providerAccountId, refresh_token, access_token, expires_at, token_type, scope, id_token, session_state },
+      data: {
+        userId, type, provider, providerAccountId,
+        refresh_token, access_token, expires_at,
+        token_type, scope, id_token, session_state,
+      },
     });
   },
 };
@@ -28,53 +36,53 @@ export const authOptions: NextAuthOptions = {
   adapter: patchedAdapter as any,
   providers: [
     AzureADProvider({
-      clientId: process.env.AZURE_AD_CLIENT_ID!,
+      clientId:     process.env.AZURE_AD_CLIENT_ID!,
       clientSecret: process.env.AZURE_AD_CLIENT_SECRET!,
-      tenantId: process.env.AZURE_AD_TENANT_ID!,
+      tenantId:     process.env.AZURE_AD_TENANT_ID!,
+      // Allows the same Microsoft account to link across sign-in methods
       allowDangerousEmailAccountLinking: true,
       authorization: {
         params: {
-          scope: "openid profile email User.Read Mail.Read Tasks.ReadWrite Calendars.Read",
+          // openid + profile + email are always granted.
+          // User.Read is the minimum to get display name & avatar from Graph.
+          // Do NOT add Mail.Read / Tasks / Calendars unless those API permissions
+          // are explicitly granted in Azure AD — it will silently break SSO.
+          scope: "openid profile email User.Read",
         },
       },
     }),
   ],
-  session: {
-    strategy: "jwt",
-  },
+  session: { strategy: "jwt" },
   pages: {
     signIn: "/login",
-    error: "/login",
+    error:  "/login",
   },
   callbacks: {
     async signIn({ user }) {
       if (!user.email) return false;
-
-      // Elevate to admin if listed in ADMIN_EMAILS
+      // Elevate to admin if listed in ADMIN_EMAILS env var
       if (adminEmails.includes(user.email.toLowerCase())) {
         try {
           await prisma.user.update({
             where: { email: user.email },
-            data: { role: Role.admin },
+            data:  { role: Role.admin },
           });
         } catch {
-          // User may not exist yet on very first login — adapter creates it
-          // next jwt callback will handle the elevation
+          // User may not exist yet on very first login — jwt callback handles elevation
         }
       }
-
       return true;
     },
 
     async jwt({ token, account, trigger }) {
-      // Persist Graph-capable access token from Azure AD on initial sign-in
+      // Persist Graph access token on initial sign-in (available for server-side Graph calls)
       if (account?.access_token) {
         token.accessToken = account.access_token;
       }
 
       if (trigger === "signIn" || !token.role) {
         const dbUser = await prisma.user.findUnique({
-          where: { email: token.email! },
+          where:  { email: token.email! },
           select: { id: true, role: true, isActive: true },
         });
 
@@ -82,7 +90,6 @@ export const authOptions: NextAuthOptions = {
           if (!dbUser.isActive) {
             return { ...token, error: "AccountDisabled" };
           }
-
           // Auto-elevate admin on first login
           if (
             adminEmails.includes((token.email ?? "").toLowerCase()) &&
@@ -90,13 +97,12 @@ export const authOptions: NextAuthOptions = {
           ) {
             await prisma.user.update({
               where: { id: dbUser.id },
-              data: { role: Role.admin },
+              data:  { role: Role.admin },
             });
             token.role = Role.admin;
           } else {
             token.role = dbUser.role;
           }
-
           token.userId = dbUser.id;
         }
       }
@@ -110,9 +116,9 @@ export const authOptions: NextAuthOptions = {
       }
       if (session.user) {
         session.user.role = token.role as Role;
-        session.user.id = token.userId as string;
+        session.user.id   = token.userId as string;
       }
-      // Expose accessToken for Microsoft Graph calls from client widgets
+      // Expose accessToken for Microsoft Graph calls from server components/API routes
       session.accessToken = token.accessToken as string | undefined;
       return session;
     },
