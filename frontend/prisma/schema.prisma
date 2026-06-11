@@ -4,9 +4,13 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("DATABASE_URL")       // Supabase pooled connection (PgBouncer)
-  directUrl = env("DIRECT_URL")         // Supabase direct connection (for migrations)
+  url       = env("DATABASE_URL")    // Supabase pooled (PgBouncer)
+  directUrl = env("DIRECT_URL")      // Supabase direct (for migrations)
 }
+
+// ============================================================
+// ENUMS
+// ============================================================
 
 enum Role {
   admin
@@ -14,6 +18,61 @@ enum Role {
   analyst
   viewer
 }
+
+enum WorkerStatus {
+  active
+  inactive
+  on_leave
+  terminated
+}
+
+enum WorkerType {
+  office
+  store
+  courier
+}
+
+enum EmploymentType {
+  permanent
+  temporary
+  partial
+  contractor
+}
+
+enum VehicleType {
+  bike
+  motorcycle
+  car
+}
+
+enum MaritalStatus {
+  single
+  married
+  divorced
+  separated
+  widowed
+}
+
+enum DocumentType {
+  contract
+  form101
+  idCopy
+  nda
+  certificates
+  vehicleLicense
+  drivingLicense
+  other
+}
+
+enum EquipmentStatus {
+  assigned
+  returned
+  lost
+}
+
+// ============================================================
+// AUTH (NextAuth.js)
+// ============================================================
 
 model Account {
   id                String  @id @default(cuid())
@@ -41,26 +100,6 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model User {
-  id                String                 @id @default(cuid())
-  name              String?
-  email             String                 @unique
-  emailVerified     DateTime?
-  image             String?
-  role              Role                   @default(viewer)
-  isActive          Boolean                @default(true)
-  accounts          Account[]
-  sessions          Session[]
-  runs              SimulationRun[]
-  settings          UserSettings?
-  dashboardLayout   UserDashboardLayout?
-  shortcuts         UserShortcut[]
-  widgetConfigs     UserWidgetConfig[]
-  announcements     CompanyAnnouncement[]  // authored announcements
-  createdAt         DateTime               @default(now())
-  updatedAt         DateTime               @updatedAt
-}
-
 model VerificationToken {
   identifier String
   token      String   @unique
@@ -68,6 +107,37 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+// ============================================================
+// USER
+// ============================================================
+
+model User {
+  id              String                @id @default(cuid())
+  name            String?
+  email           String                @unique
+  emailVerified   DateTime?
+  image           String?
+  role            Role                  @default(viewer)
+  isActive        Boolean               @default(true)
+  accounts        Account[]
+  sessions        Session[]
+  runs            SimulationRun[]
+  settings        UserSettings?
+  dashboardLayout UserDashboardLayout?
+  shortcuts       UserShortcut[]
+  widgetConfigs   UserWidgetConfig[]
+  announcements   CompanyAnnouncement[]
+  uploadedDocs    WorkerDocument[]      @relation("UploadedBy")
+  assignedEquip   WorkerEquipment[]     @relation("AssignedBy")
+  workerActivity  WorkerActivity[]
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
+}
+
+// ============================================================
+// SIMULATOR
+// ============================================================
 
 model SimulationRun {
   id        String   @id @default(cuid())
@@ -79,12 +149,16 @@ model SimulationRun {
   createdAt DateTime @default(now())
 }
 
+// ============================================================
+// USER PREFERENCES & DASHBOARD
+// ============================================================
+
 model UserSettings {
   id        String   @id @default(cuid())
   userId    String   @unique
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  language  String   @default("he")    // "he" | "en" | "ru"
-  theme     String   @default("light") // "light" | "dark" | "system"
+  language  String   @default("he")
+  theme     String   @default("light")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -93,7 +167,7 @@ model UserDashboardLayout {
   id        String   @id @default(cuid())
   userId    String   @unique
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  layout    Json
+  layout    Json     @default("[]")
   updatedAt DateTime @updatedAt
 }
 
@@ -118,11 +192,12 @@ model UserWidgetConfig {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   widgetKey String
   position  Int
-  size      String   @default("medium")  // "small" | "medium" | "large" | "full"
+  size      String   @default("medium")
   config    Json?
   isVisible Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
   @@unique([userId, widgetKey])
 }
 
@@ -137,4 +212,202 @@ model CompanyAnnouncement {
   expiresAt   DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+// ============================================================
+// HR — DEPARTMENTS & STORES
+// ============================================================
+
+model HrDepartment {
+  id        String   @id @default(cuid())
+  name      String
+  workers   Worker[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model HrStore {
+  id        String   @id @default(cuid())
+  name      String
+  address   String?
+  city      String?
+  workers   Worker[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================================
+// HR — WORKERS
+// ============================================================
+
+model Worker {
+  id             String         @id @default(cuid())
+
+  // Identity
+  firstName      String
+  lastName       String
+  phone          String?
+  email          String?
+  workEmail      String?
+  idNumber       String?
+  dateOfBirth    DateTime?
+  address        String?
+  city           String?
+  maritalStatus  MaritalStatus?
+  photoUrl       String?
+
+  // Employment
+  employeeNumber String?        @unique
+  positionTitle  String?
+  positionDesc   String?
+  workerType     WorkerType?
+  employmentType EmploymentType?
+  jobScope       Decimal?       @db.Decimal(5, 2)
+  vehicleType    VehicleType?
+  vehicleNumber  String?
+  leadSource     String?
+  status         WorkerStatus   @default(active)
+  startDate      DateTime?
+  endDate        DateTime?
+
+  // Salary
+  grossSalary    Decimal?       @db.Decimal(12, 2)
+  netSalary      Decimal?       @db.Decimal(12, 2)
+  currency       String         @default("ILS")
+
+  // Banking
+  bankName       String?
+  bankBranch     String?
+  bankAccount    String?
+
+  // Relations
+  departmentId   String?
+  department     HrDepartment?  @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  storeId        String?
+  store          HrStore?       @relation(fields: [storeId], references: [id], onDelete: SetNull)
+
+  // Recruitment link
+  candidateId    String?
+
+  // Sub-relations
+  documents      WorkerDocument[]
+  equipment      WorkerEquipment[]
+  careerHistory  WorkerCareer[]
+  activity       WorkerActivity[]
+
+  // Soft delete
+  deletedAt      DateTime?
+
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([status])
+  @@index([workerType])
+  @@index([departmentId])
+  @@index([storeId])
+  @@index([deletedAt])
+}
+
+// ============================================================
+// HR — DOCUMENTS
+// ============================================================
+
+model WorkerDocument {
+  id           String       @id @default(cuid())
+  workerId     String
+  worker       Worker       @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  type         DocumentType
+  title        String
+  storagePath  String
+  mimeType     String?
+  sizeBytes    BigInt?
+  version      Int          @default(1)
+  previousId   String?
+  previous     WorkerDocument?  @relation("DocVersions", fields: [previousId], references: [id], onDelete: SetNull)
+  versions     WorkerDocument[] @relation("DocVersions")
+  uploadedById String?
+  uploadedBy   User?        @relation("UploadedBy", fields: [uploadedById], references: [id], onDelete: SetNull)
+  deletedAt    DateTime?
+  createdAt    DateTime     @default(now())
+
+  @@index([workerId])
+  @@index([deletedAt])
+}
+
+// ============================================================
+// HR — EQUIPMENT
+// ============================================================
+
+model WorkerEquipment {
+  id           String          @id @default(cuid())
+  workerId     String
+  worker       Worker          @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  name         String
+  description  String?
+  serialNumber String?
+  status       EquipmentStatus @default(assigned)
+  assignedDate DateTime        @default(now())
+  returnedDate DateTime?
+  assignedById String?
+  assignedBy   User?           @relation("AssignedBy", fields: [assignedById], references: [id], onDelete: SetNull)
+  deletedAt    DateTime?
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  @@index([workerId])
+}
+
+// ============================================================
+// HR — CAREER HISTORY
+// ============================================================
+
+model WorkerCareer {
+  id            String   @id @default(cuid())
+  workerId      String
+  worker        Worker   @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  positionTitle String
+  department    String?
+  startDate     DateTime
+  endDate       DateTime?
+  notes         String?
+  createdAt     DateTime @default(now())
+
+  @@index([workerId])
+}
+
+// ============================================================
+// HR — ACTIVITY LOG
+// ============================================================
+
+model WorkerActivity {
+  id          String   @id @default(cuid())
+  workerId    String
+  worker      Worker   @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  type        String
+  description String
+  fieldName   String?
+  oldValue    String?
+  newValue    String?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+
+  @@index([workerId])
+  @@index([createdAt(sort: Desc)])
+}
+
+// ============================================================
+// HR — FIELD PERMISSIONS
+// ============================================================
+
+model HrFieldPermission {
+  id        String   @id @default(cuid())
+  role      Role
+  fieldKey  String
+  canView   Boolean  @default(true)
+  canEdit   Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+
+  @@unique([role, fieldKey])
 }
