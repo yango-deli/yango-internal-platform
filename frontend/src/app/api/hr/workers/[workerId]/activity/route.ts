@@ -10,11 +10,7 @@ export async function GET(req: NextRequest, { params }: { params: { workerId: st
   const page = parseInt(searchParams.get("page") ?? "1");
   const perPage = 20;
   const where: any = { workerId: params.workerId };
-  const typeFilter = searchParams.get("type");
-  if (typeFilter) where.type = typeFilter;
-  const [total, activities] = await Promise.all([
-    prisma.workerActivity.count({ where }),
-    prisma.workerActivity.findMany({ where, orderBy: { createdAt: "desc" }, skip: (page - 1) * perPage, take: perPage }),
-  ]);
+  const typeFilter = searchParams.get("type"); if (typeFilter) where.type = typeFilter;
+  const [total, activities] = await Promise.all([prisma.workerActivity.count({ where }), prisma.workerActivity.findMany({ where, include: { user: { select: { name: true } } }, orderBy: { createdAt: "desc" }, skip: (page - 1) * perPage, take: perPage })]);
   return NextResponse.json({ activities, page, pages: Math.ceil(total / perPage), total });
 }
