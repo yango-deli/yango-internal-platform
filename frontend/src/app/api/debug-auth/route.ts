@@ -8,5 +8,6 @@ export async function GET() {
     NEXTAUTH_URL:           process.env.NEXTAUTH_URL            ?? "MISSING",
     NEXTAUTH_SECRET:        process.env.NEXTAUTH_SECRET         ? `set (length: ${process.env.NEXTAUTH_SECRET.length})` : "MISSING",
     NODE_ENV:               process.env.NODE_ENV,
+    DATABASE_URL:           process.env.DATABASE_URL            ? "set" : "MISSING",
   });
 }
