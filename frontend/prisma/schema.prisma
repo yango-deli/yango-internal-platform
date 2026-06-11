@@ -145,6 +145,7 @@ model CompanyAnnouncement {
 
 model RecruitmentPosition {
   id          String      @id @default(cuid())
+  slug        String?     @unique
   title       String
   department  String?
   description String?     @db.Text
@@ -178,8 +179,35 @@ model Candidate {
   formData      Json?
   tags          String[]
   isArchived    Boolean  @default(false)
+  websiteLead   WebsiteLead?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+}
+
+// Dedicated store for raw leads submitted through the recruitment website.
+// Captures every submission (profession/role + all form fields + raw payload)
+// and tracks the current pipeline status, kept in sync with the linked Candidate.
+model WebsiteLead {
+  id            String   @id @default(cuid())
+  role          String          // couriers | pickers | support | manager
+  firstName     String
+  lastName      String
+  phone         String
+  city          String?
+  vehicle       String?         // ebike | scooter | car (couriers)
+  taxRegistered String?         // yes | no (couriers)
+  locale        String?         // he | en | ru
+  source        String   @default("website")
+  status        String   @default("new")   // mirrors the linked Candidate.stage
+  candidateId   String?  @unique
+  candidate     Candidate? @relation(fields: [candidateId], references: [id], onDelete: SetNull)
+  rawPayload    Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([role])
+  @@index([status])
+  @@index([phone])
 }
 
 model CandidateStageHistory {

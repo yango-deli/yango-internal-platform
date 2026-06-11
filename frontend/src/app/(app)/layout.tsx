@@ -25,7 +25,7 @@ export default async function AppLayout({
   const language = (settings?.language ?? "he") as SupportedLanguage;
 
   return (
-    <div className="flex min-h-screen bg-gray-50" dir={language === "he" ? "rtl" : "ltr"}>
+    <div className="flex min-h-screen bg-gray-50">
       <LanguageSync language={language} />
       <Sidebar />
       <div className="flex flex-col flex-1 min-w-0">

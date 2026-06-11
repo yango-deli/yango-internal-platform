@@ -152,5 +152,12 @@ export async function PATCH(req: NextRequest) {
     )
   );
 
+  if (stage !== undefined) {
+    await prisma.websiteLead.updateMany({
+      where: { candidateId: { in: ids } },
+      data: { status: stage },
+    });
+  }
+
   return NextResponse.json({ updated: updates.length });
 }

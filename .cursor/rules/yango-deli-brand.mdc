@@ -1,0 +1,50 @@
+---
+description: Yango Deli brand design language for the internal platform UI. Apply to all UI work.
+alwaysApply: true
+category: core
+tags: [ui, brand, yango-deli]
+---
+
+# Yango Deli — Internal Platform Design Language
+
+Brand-specific design rules for this repo. Combine with the always-on `design-core`
+principles and the `ui-design-brain` / `using-ui-stack` skills. Design token source of
+truth: `design/tokens/colors.md`, `design/tokens/spacing.md`, `design/tokens/typography.md`.
+Full reference: `Yango_Deli_Design_Language_Guide.md`.
+
+## Brand essentials
+
+- **Signature color**: vibrant yellow `#FFCC00` (hover `#E6B800`). Use strategically for
+  primary CTAs, active nav/states, and key highlights — never as generic decoration
+  (follow 60-30-10: ~60% neutral, ~30% structure, ~10% yellow accent).
+- **Yellow always pairs with near-black text/icons** (`#0F1115`) for WCAG AA contrast.
+- **Red** only for discounts/urgency/destructive/error. **Blue/purple** as secondary accents.
+- **Surfaces**: white cards on light-gray (`#F5F5F7`) backgrounds; subtle token shadow
+  (`shadow-sm`), never heavy or per-component novel shadows. No auto gradients.
+- **Rounded corners everywhere**: cards `rounded-xl` (12–20px), chips/badges `rounded-full`,
+  inputs/buttons `rounded-lg`.
+- **Typography**: Inter, strong weight contrast, prominent numbers; `₪` for money.
+
+## Implementation rules
+
+- Use Tailwind spacing on the **8px grid** (`p-2/p-3/p-4/gap-2…`); no ad-hoc pixels.
+- Every interactive element implements all 5 states: default, hover, active, **visible
+  focus ring** (`focus-visible:ring-2`), disabled.
+- Prefer **skeletons** that match the real layout over spinners for loading.
+- **Empty states**: short headline + helpful subtext + a primary CTA.
+- Badges are **semantic, pill-shaped, limited palette** — no rainbow status colors.
+  Recruitment stage colors are defined in `frontend/src/types/recruitment.ts`.
+
+## Trilingual + RTL (non-negotiable)
+
+- All user-facing strings come from i18n (`he` / `en` / `ru`); never hardcode copy.
+- Use **logical CSS properties** (`ms-*`, `me-*`, `ps-*`, `pe-*`, `start-*`, `end-*`,
+  `text-start`) so Hebrew RTL mirrors correctly. Direction is driven globally by the
+  i18n provider (`document.dir`).
+
+## Anti-patterns (do not ship)
+
+- Yellow used for large backgrounds or non-actionable decoration.
+- `left/right` utilities in components that must support RTL.
+- Color-only state signaling; missing focus states; spinner for predictable layouts.
+- New fonts/shadows/radii that diverge from the tokens above.

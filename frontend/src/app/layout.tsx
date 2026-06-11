@@ -1,14 +1,29 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Rubik, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { Toaster } from "sonner";
 
-const inter = Inter({ subsets: ["latin"] });
+// Rubik covers Latin, Cyrillic and Hebrew — one family for all three UI languages.
+const rubik = Rubik({
+  subsets: ["latin", "latin-ext", "cyrillic", "hebrew"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+// Space Grotesk is the expressive display accent (wordmark, headings, KPI numbers);
+// gracefully falls back to Rubik for scripts it doesn't cover.
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin", "latin-ext"],
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Yango Deli — Promo Simulator",
-  description: "Supplier Promotion Simulation Platform",
+  title: "Yango Deli — Internal Platform",
+  description: "Yango Deli internal platform — recruitment, simulation and more",
 };
 
 export default function RootLayout({
@@ -18,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${rubik.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
         <Providers>
           {children}
           <Toaster position="top-right" richColors closeButton />

@@ -58,6 +58,14 @@ export function I18nProvider({
   );
 
   const dir = getLanguageDir(language);
+
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.dir = dir;
+      document.documentElement.lang = language;
+    }
+  }, [dir, language]);
+
   const value = useMemo(
     () => ({
       language,

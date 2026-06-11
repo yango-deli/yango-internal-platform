@@ -5,6 +5,7 @@ node_modules/
 .next/
 *.log
 pgdata/
+.localdb/
 __pycache__/
 *.pyc
 .venv/

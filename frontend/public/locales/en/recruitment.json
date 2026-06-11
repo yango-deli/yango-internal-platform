@@ -101,7 +101,16 @@
     "toStage": "To",
     "changedBy": "Changed By",
     "reason": "Reason",
-    "date": "Date"
+    "date": "Date",
+    "leadDetails": "Lead details",
+    "profession": "Profession",
+    "taxRegistered": "Registered with tax authority",
+    "language": "Language",
+    "receivedAt": "Received"
+  },
+  "common": {
+    "yes": "Yes",
+    "no": "No"
   },
   "modal": {
     "stageReasonTitle": "Reason for stage change",

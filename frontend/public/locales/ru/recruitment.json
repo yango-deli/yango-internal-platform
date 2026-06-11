@@ -101,7 +101,16 @@
     "toStage": "В",
     "changedBy": "Изменил",
     "reason": "Причина",
-    "date": "Дата"
+    "date": "Дата",
+    "leadDetails": "Детали лида",
+    "profession": "Профессия",
+    "taxRegistered": "Зарегистрирован в налоговой",
+    "language": "Язык",
+    "receivedAt": "Получен"
+  },
+  "common": {
+    "yes": "Да",
+    "no": "Нет"
   },
   "modal": {
     "stageReasonTitle": "Причина смены стадии",

@@ -8,6 +8,7 @@ import {
   requireAdmin,
 } from "@/lib/recruitment/auth";
 import { candidateInclude } from "@/lib/recruitment/queries";
+import { syncWebsiteLeadStatus } from "@/lib/recruitment/website-intake";
 import { RECRUITMENT_STAGES, STAGES_REQUIRING_REASON } from "@/types/recruitment";
 
 type Params = { params: { id: string } };
@@ -94,6 +95,8 @@ export async function PATCH(req: NextRequest, { params }: Params) {
         },
       }),
     ]);
+
+    await syncWebsiteLeadStatus(params.id, stage);
 
     const updated = await prisma.candidate.findUnique({
       where: { id: params.id },

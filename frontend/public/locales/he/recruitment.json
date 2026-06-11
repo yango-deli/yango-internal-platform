@@ -101,7 +101,16 @@
     "toStage": "ל",
     "changedBy": "שונה על ידי",
     "reason": "סיבה",
-    "date": "תאריך"
+    "date": "תאריך",
+    "leadDetails": "פרטי הליד",
+    "profession": "תפקיד",
+    "taxRegistered": "רשום ברשות המסים",
+    "language": "שפה",
+    "receivedAt": "התקבל"
+  },
+  "common": {
+    "yes": "כן",
+    "no": "לא"
   },
   "modal": {
     "stageReasonTitle": "סיבה לשינוי שלב",

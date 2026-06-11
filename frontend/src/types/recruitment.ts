@@ -37,6 +37,20 @@ export const STAGE_COLORS: Record<RecruitmentStage, string> = {
   on_hold: "bg-amber-100 border-amber-300 text-amber-800",
 };
 
+// Solid accent color per stage (for dots, accent strips). Semantic, limited palette.
+export const STAGE_ACCENT: Record<RecruitmentStage, string> = {
+  new: "bg-gray-400",
+  contacted: "bg-blue-500",
+  screening: "bg-yellow-500",
+  interview_scheduled: "bg-orange-500",
+  interview_done: "bg-purple-500",
+  offer_sent: "bg-teal-500",
+  hired: "bg-green-500",
+  rejected: "bg-red-500",
+  irrelevant: "bg-slate-400",
+  on_hold: "bg-amber-500",
+};
+
 export const STAGES_REQUIRING_REASON: RecruitmentStage[] = [
   "rejected",
   "irrelevant",

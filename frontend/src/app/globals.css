@@ -4,37 +4,37 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 240 14% 97%;
+    --foreground: 222 24% 8%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 24% 8%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 222 24% 8%;
     --primary: 47 100% 50%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --primary-foreground: 222 24% 8%;
+    --secondary: 240 10% 95%;
+    --secondary-foreground: 222 24% 11%;
+    --muted: 240 10% 95%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 240 10% 95%;
+    --accent-foreground: 222 24% 11%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 12% 90%;
+    --input: 240 12% 90%;
     --ring: 47 100% 50%;
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --background: 222 24% 6%;
+    --foreground: 240 14% 97%;
+    --card: 222 24% 9%;
+    --card-foreground: 240 14% 97%;
+    --border: 222 16% 18%;
+    --input: 222 16% 18%;
+    --muted: 222 16% 16%;
+    --muted-foreground: 220 9% 65%;
   }
 }
 
@@ -44,10 +44,35 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3 {
+    @apply font-display tracking-tight;
   }
 }
 
-/* RTL support for Hebrew email preview */
+@layer utilities {
+  /* Subtle scrollbars for kanban / scroll areas */
+  .scrollbar-slim {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(15, 17, 21, 0.18) transparent;
+  }
+  .scrollbar-slim::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+  .scrollbar-slim::-webkit-scrollbar-thumb {
+    background-color: rgba(15, 17, 21, 0.16);
+    border-radius: 9999px;
+  }
+  .scrollbar-slim::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(15, 17, 21, 0.28);
+  }
+}
+
+/* RTL helper retained for email preview */
 .rtl {
   direction: rtl;
   text-align: right;

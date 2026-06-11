@@ -57,6 +57,7 @@ export const config = {
     "/users/:path*",
     "/api/simulate/:path*",
     "/api/users/:path*",
-    "/api/recruitment/:path*",
+    // All recruitment APIs require auth except the public website-lead webhook.
+    "/api/recruitment/((?!webhook).*)",
   ],
 };

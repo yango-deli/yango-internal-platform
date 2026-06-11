@@ -153,6 +153,42 @@ export function CandidateSidePanel({
                   <Input value={String(value)} readOnly className="bg-gray-50" />
                 </div>
               ))}
+
+              {/* Lead details — profession + fields captured from the website form */}
+              {(() => {
+                const fd = (candidate.formData ?? {}) as Record<string, unknown>;
+                const rows: [string, string][] = [];
+                if (candidate.position?.title)
+                  rows.push([t("panel.profession"), candidate.position.title]);
+                if (candidate.vehicleType)
+                  rows.push([t("form.vehicleType"), candidate.vehicleType]);
+                if (typeof fd.taxRegistered === "string")
+                  rows.push([
+                    t("panel.taxRegistered"),
+                    fd.taxRegistered === "yes" ? t("common.yes") : t("common.no"),
+                  ]);
+                if (typeof fd.locale === "string")
+                  rows.push([t("panel.language"), String(fd.locale).toUpperCase()]);
+                rows.push([t("panel.receivedAt"), formatDate(candidate.createdAt)]);
+
+                return (
+                  <div className="rounded-xl border border-gray-100 bg-gray-50/60 p-3">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
+                      {t("panel.leadDetails")}
+                    </p>
+                    <dl className="space-y-1.5">
+                      {rows.map(([label, value]) => (
+                        <div key={label} className="flex items-center justify-between gap-3">
+                          <dt className="text-xs text-gray-500">{label}</dt>
+                          <dd className="text-xs font-medium text-gray-900 text-end">
+                            {value}
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </div>
+                );
+              })()}
               {canConvert && (
                 <Button
                   className="w-full"

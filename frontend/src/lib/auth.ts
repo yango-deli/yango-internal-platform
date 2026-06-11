@@ -1,5 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import AzureADProvider from "next-auth/providers/azure-ad";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import { Role } from "@prisma/client";
@@ -9,6 +10,67 @@ const adminEmails = (process.env.ADMIN_EMAILS ?? "")
   .split(",")
   .map((e) => e.trim().toLowerCase())
   .filter(Boolean);
+
+// Local-only email login, enabled with ENABLE_DEV_LOGIN=true.
+// Lets you sign in by entering an email (no Azure AD). Never enable in production.
+export const devLoginEnabled =
+  process.env.ENABLE_DEV_LOGIN === "true" &&
+  process.env.NODE_ENV !== "production";
+
+export const azureConfigured =
+  !!process.env.AZURE_AD_CLIENT_ID &&
+  !!process.env.AZURE_AD_CLIENT_SECRET &&
+  !!process.env.AZURE_AD_TENANT_ID;
+
+const providers: NextAuthOptions["providers"] = [];
+
+if (azureConfigured) {
+  providers.push(
+    AzureADProvider({
+      clientId: process.env.AZURE_AD_CLIENT_ID!,
+      clientSecret: process.env.AZURE_AD_CLIENT_SECRET!,
+      tenantId: process.env.AZURE_AD_TENANT_ID!,
+      allowDangerousEmailAccountLinking: true,
+      authorization: {
+        params: {
+          scope: "openid profile email User.Read Mail.Read Tasks.ReadWrite Calendars.Read",
+        },
+      },
+    })
+  );
+}
+
+if (devLoginEnabled) {
+  providers.push(
+    CredentialsProvider({
+      id: "dev-login",
+      name: "Dev Login",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        name: { label: "Name", type: "text" },
+      },
+      async authorize(credentials) {
+        const email = credentials?.email?.trim().toLowerCase();
+        if (!email) return null;
+        const name =
+          credentials?.name?.trim() ||
+          email.split("@")[0].replace(/[._-]+/g, " ");
+        const isAdmin = adminEmails.includes(email);
+        const user = await prisma.user.upsert({
+          where: { email },
+          update: {},
+          create: {
+            email,
+            name,
+            role: isAdmin ? Role.admin : Role.viewer,
+            emailVerified: new Date(),
+          },
+        });
+        return { id: user.id, email: user.email, name: user.name };
+      },
+    })
+  );
+}
 
 // Azure AD returns extra fields (ext_expires_in, etc.) that Prisma rejects.
 // Patch linkAccount to only pass fields the schema knows about.
@@ -26,19 +88,7 @@ const patchedAdapter = {
 export const authOptions: NextAuthOptions = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   adapter: patchedAdapter as any,
-  providers: [
-    AzureADProvider({
-      clientId: process.env.AZURE_AD_CLIENT_ID!,
-      clientSecret: process.env.AZURE_AD_CLIENT_SECRET!,
-      tenantId: process.env.AZURE_AD_TENANT_ID!,
-      allowDangerousEmailAccountLinking: true,
-      authorization: {
-        params: {
-          scope: "openid profile email User.Read Mail.Read Tasks.ReadWrite Calendars.Read",
-        },
-      },
-    }),
-  ],
+  providers,
   session: {
     strategy: "jwt",
   },

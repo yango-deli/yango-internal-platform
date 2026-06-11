@@ -43,19 +43,49 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Semantic surfaces (see design/tokens/colors.md)
+        surface: {
+          DEFAULT: "#FFFFFF",
+          subtle: "#F4F4F6",
+          muted: "#ECECF0",
+        },
+        ink: {
+          DEFAULT: "#0F1115",
+          muted: "#6B7280",
+          soft: "#9AA0AB",
+        },
         brand: {
           yellow: "#FFCC00",
           "yellow-dark": "#E6B800",
           "yellow-light": "#FFF3B0",
+          "yellow-tint": "#FFF8D6",
         },
+      },
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "var(--font-sans)", "system-ui", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        "2xl": "1rem",
+        "3xl": "1.5rem",
       },
-      fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+      boxShadow: {
+        soft: "0 1px 2px rgba(15, 17, 21, 0.04), 0 1px 3px rgba(15, 17, 21, 0.06)",
+        card: "0 1px 2px rgba(15, 17, 21, 0.04), 0 4px 16px rgba(15, 17, 21, 0.06)",
+        lift: "0 8px 30px rgba(15, 17, 21, 0.12)",
+        "brand-glow": "0 8px 24px rgba(255, 204, 0, 0.35)",
+      },
+      keyframes: {
+        "fade-in": {
+          from: { opacity: "0", transform: "translateY(4px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        "fade-in": "fade-in 0.2s ease-out",
       },
     },
   },

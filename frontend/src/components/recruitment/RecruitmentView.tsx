@@ -4,7 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 import useSWR from "swr";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Plus, BarChart3, Upload } from "lucide-react";
+import { Plus, BarChart3, Upload, UserPlus, Search } from "lucide-react";
 import { toast } from "sonner";
 import { useI18n } from "@/components/providers/i18n-provider";
 import { Button } from "@/components/ui/button";
@@ -90,7 +90,7 @@ export function RecruitmentView() {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-xl font-semibold">{t("page.title")}</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900">{t("page.title")}</h1>
         <div className="flex items-center gap-2">
           <Link href="/recruitment/stats">
             <Button variant="outline" size="sm">
@@ -111,13 +111,16 @@ export function RecruitmentView() {
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center gap-3">
-        <Input
-          className="max-w-xs"
-          placeholder={t("page.search")}
-          value={filters.search}
-          onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))}
-        />
+      <div className="flex flex-wrap items-center gap-2.5">
+        <div className="relative w-full max-w-xs">
+          <Search className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+          <Input
+            className="ps-9 rounded-full"
+            placeholder={t("page.search")}
+            value={filters.search}
+            onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))}
+          />
+        </div>
         <Select
           value={filters.source || "all"}
           onValueChange={(v) =>
@@ -154,12 +157,14 @@ export function RecruitmentView() {
             ))}
           </SelectContent>
         </Select>
-        <div className="flex rounded-lg border overflow-hidden ms-auto">
+        <div className="flex items-center gap-1 rounded-full border border-gray-200 bg-white p-1 ms-auto shadow-soft">
           <Link
             href="/recruitment"
             className={cn(
-              "px-3 py-1.5 text-xs font-medium",
-              view === "kanban" ? "bg-[#FFCC00]" : "bg-white text-gray-600"
+              "rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors",
+              view === "kanban"
+                ? "bg-[#FFCC00] text-gray-900 shadow-soft"
+                : "text-gray-500 hover:text-gray-900"
             )}
           >
             {t("page.viewKanban")}
@@ -167,8 +172,10 @@ export function RecruitmentView() {
           <Link
             href="/recruitment?view=table"
             className={cn(
-              "px-3 py-1.5 text-xs font-medium",
-              view === "table" ? "bg-[#FFCC00]" : "bg-white text-gray-600"
+              "rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors",
+              view === "table"
+                ? "bg-[#FFCC00] text-gray-900 shadow-soft"
+                : "text-gray-500 hover:text-gray-900"
             )}
           >
             {t("page.viewTable")}
@@ -177,11 +184,37 @@ export function RecruitmentView() {
       </div>
 
       {isLoading ? (
-        <div className="h-64 animate-pulse bg-gray-100 rounded-xl" />
+        <div className="flex gap-3 overflow-x-auto pb-2" aria-hidden>
+          {Array.from({ length: 5 }).map((_, col) => (
+            <div
+              key={col}
+              className="flex flex-col w-64 min-w-[16rem] rounded-xl border border-gray-100 bg-gray-50/80"
+            >
+              <div className="h-8 rounded-t-xl bg-gray-200/70 animate-pulse" />
+              <div className="p-2 space-y-2">
+                {Array.from({ length: 3 - (col % 2) }).map((_, c) => (
+                  <div
+                    key={c}
+                    className="h-20 rounded-lg bg-white border border-gray-100 shadow-sm animate-pulse"
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       ) : !candidates.length ? (
-        <div className="text-center py-16 text-gray-400">
-          <p className="font-medium">{t("page.empty")}</p>
-          <p className="text-sm mt-1">{t("page.emptyDescription")}</p>
+        <div className="flex flex-col items-center text-center py-16">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#FFF3B0]">
+            <UserPlus className="h-7 w-7 text-[#E6B800]" />
+          </div>
+          <p className="mt-4 font-semibold text-gray-900">{t("page.empty")}</p>
+          <p className="text-sm text-gray-500 mt-1 max-w-sm">
+            {t("page.emptyDescription")}
+          </p>
+          <Button size="sm" className="mt-5" onClick={() => setShowAdd(true)}>
+            <Plus className="h-4 w-4 me-1" />
+            {t("page.addCandidate")}
+          </Button>
         </div>
       ) : view === "table" ? (
         <CandidateTable

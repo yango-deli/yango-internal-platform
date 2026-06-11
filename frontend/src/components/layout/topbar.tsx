@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { LogOut, ChevronDown } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
 
 function getTitleFromPath(pathname: string): string {
   if (pathname.startsWith("/simulation")) return "Simulation Tool";
@@ -38,9 +39,11 @@ export function Topbar() {
     .toUpperCase() ?? "?";
 
   return (
-    <header className="h-14 flex items-center justify-between px-6 bg-white border-b border-gray-200">
-      <h1 className="text-base font-semibold text-gray-900">{title}</h1>
+    <header className="sticky top-0 z-20 h-16 flex items-center justify-between px-6 bg-white/80 backdrop-blur-md border-b border-gray-100">
+      <h1 className="font-display text-lg font-semibold tracking-tight text-gray-900">{title}</h1>
 
+      <div className="flex items-center gap-1">
+      <LanguageSwitcher />
       <div className="relative" ref={ref}>
         <button
           onClick={() => setOpen((o) => !o)}
@@ -61,7 +64,7 @@ export function Topbar() {
         </button>
 
         {open && (
-          <div className="absolute right-0 top-full mt-1.5 w-56 bg-white rounded-xl border border-gray-200 shadow-lg py-1 z-50">
+          <div className="absolute end-0 top-full mt-1.5 w-56 bg-white rounded-xl border border-gray-200 shadow-lg py-1 z-50">
             <div className="px-3 py-2 border-b border-gray-100">
               <p className="text-xs font-medium text-gray-900 truncate">
                 {session?.user?.name}
@@ -80,6 +83,7 @@ export function Topbar() {
             </button>
           </div>
         )}
+      </div>
       </div>
     </header>
   );
