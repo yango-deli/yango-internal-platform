@@ -10,8 +10,6 @@ const adminEmails = (process.env.ADMIN_EMAILS ?? "")
   .map((e) => e.trim().toLowerCase())
   .filter(Boolean);
 
-// Azure AD returns extra fields (ext_expires_in, etc.) that Prisma rejects.
-// Patch linkAccount to only pass fields the schema knows about.
 const baseAdapter = PrismaAdapter(prisma);
 const patchedAdapter = {
   ...baseAdapter,
@@ -22,6 +20,8 @@ const patchedAdapter = {
     });
   },
 };
+
+const NEXTAUTH_URL = process.env.NEXTAUTH_URL ?? "https://supplier-promo-simulation.vercel.app";
 
 export const authOptions: NextAuthOptions = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,6 +34,7 @@ export const authOptions: NextAuthOptions = {
       allowDangerousEmailAccountLinking: true,
       authorization: {
         params: {
+          redirect_uri: `${NEXTAUTH_URL}/api/auth/callback/azure-ad`,
           scope: "openid profile email User.Read Mail.Read Tasks.ReadWrite Calendars.Read Files.Read.All Sites.Read.All Presence.Read Team.ReadBasic.All User.Read.All Directory.Read.All",
         },
       },
@@ -50,7 +51,6 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user }) {
       if (!user.email) return false;
 
-      // Elevate to admin if listed in ADMIN_EMAILS
       if (adminEmails.includes(user.email.toLowerCase())) {
         try {
           await prisma.user.update({
@@ -58,8 +58,7 @@ export const authOptions: NextAuthOptions = {
             data: { role: Role.admin },
           });
         } catch {
-          // User may not exist yet on very first login — adapter creates it
-          // next jwt callback will handle the elevation
+          // User may not exist yet on first login
         }
       }
 
@@ -67,7 +66,6 @@ export const authOptions: NextAuthOptions = {
     },
 
     async jwt({ token, account, trigger }) {
-      // Persist Graph-capable access token from Azure AD on initial sign-in
       if (account?.access_token) {
         token.accessToken = account.access_token;
       }
@@ -83,7 +81,6 @@ export const authOptions: NextAuthOptions = {
             return { ...token, error: "AccountDisabled" };
           }
 
-          // Auto-elevate admin on first login
           if (
             adminEmails.includes((token.email ?? "").toLowerCase()) &&
             dbUser.role !== Role.admin
@@ -112,7 +109,6 @@ export const authOptions: NextAuthOptions = {
         session.user.role = token.role as Role;
         session.user.id = token.userId as string;
       }
-      // Expose accessToken for Microsoft Graph calls from client widgets
       session.accessToken = token.accessToken as string | undefined;
       return session;
     },
