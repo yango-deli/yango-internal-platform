@@ -6,164 +6,19 @@
   "exportExcel": "ייצוא לאקסל",
   "noWorkers": "לא נמצאו עובדים",
   "noWorkersDesc": "נסה לשנות את הסינון או להוסיף עובד חדש",
-  "tabs": {
-    "personal": "פרטים אישיים",
-    "employment": "תעסוקה",
-    "salary": "שכר וקרנות",
-    "documents": "מסמכים",
-    "equipment": "ציוד",
-    "career": "היסטוריה מקצועית",
-    "activity": "יומן פעילות"
-  },
-  "status": {
-    "active": "פעיל",
-    "inactive": "לא פעיל",
-    "on_leave": "בחופשה",
-    "terminated": "הסתיים"
-  },
-  "workerType": {
-    "office": "משרד",
-    "store": "חנות",
-    "courier": "שליח"
-  },
-  "employmentType": {
-    "permanent": "קבוע",
-    "temporary": "זמני",
-    "partial": "חלקי",
-    "contractor": "קבלן"
-  },
-  "vehicleType": {
-    "bike": "אופניים",
-    "motorcycle": "אופנוע",
-    "car": "רכב"
-  },
-  "maritalStatus": {
-    "single": "רווק/ה",
-    "married": "נשוי/אה",
-    "divorced": "גרוש/ה",
-    "separated": "פרוד/ה",
-    "widowed": "אלמן/ה"
-  },
-  "fields": {
-    "firstName": "שם פרטי",
-    "lastName": "שם משפחה",
-    "phone": "טלפון",
-    "email": "אימייל אישי",
-    "workEmail": "אימייל עבודה",
-    "idNumber": "ת.ז.",
-    "dateOfBirth": "תאריך לידה",
-    "address": "כתובת",
-    "city": "עיר",
-    "maritalStatus": "מצב משפחתי",
-    "employeeNumber": "מספר עובד",
-    "positionTitle": "תפקיד",
-    "positionDesc": "תיאור תפקיד",
-    "workerType": "סוג עובד",
-    "employmentType": "סוג העסקה",
-    "jobScope": "היקף משרה (%)",
-    "vehicleType": "סוג רכב",
-    "vehicleNumber": "מספר רכב",
-    "leadSource": "מקור גיוס",
-    "status": "סטטוס",
-    "startDate": "תאריך התחלה",
-    "endDate": "תאריך סיום",
-    "grossSalary": "שכר ברוטו",
-    "netSalary": "שכר נטו",
-    "currency": "מטבע",
-    "bankName": "בנק",
-    "bankBranch": "סניף",
-    "bankAccount": "מספר חשבון",
-    "department": "מחלקה",
-    "store": "חנות",
-    "manager": "מנהל"
-  },
-  "profile": {
-    "editProfile": "עריכה",
-    "saveAll": "שמור שינויים",
-    "discard": "בטל",
-    "delete": "מחק עובד",
-    "deleteConfirm": "האם אתה בטוח שברצונך למחוק את העובד? לא ניתן לבטל פעולה זו.",
-    "uploadPhoto": "התמונה עודכנה",
-    "manager": "מנהל",
-    "viewCandidate": "עבור למועמד המקורי",
-    "recruitedVia": "גויס דרך {{source}}",
-    "tenure": "{{years}} שנה {{months}} חודש",
-    "tenureYears": "{{years}} שנה",
-    "tenureMonths": "{{months}} חודש"
-  },
-  "salary": {
-    "banking": "פרטי בנק",
-    "grossNet": "שכר ברוטו / נטו"
-  },
-  "documents": {
-    "contract": "חוזה עבודה",
-    "form101": "טופס 101",
-    "idCopy": "צילום ת.ז.",
-    "nda": "הסכם סודיות",
-    "certificates": "תעודות",
-    "vehicleLicense": "רישיון רכב",
-    "drivingLicense": "רישיון נהיגה",
-    "other": "מסמכים נוספים",
-    "uploadFile": "העלה",
-    "uploading": "מעלה…",
-    "noDocument": "לא הועלה מסמך",
-    "uploadedBy": "הועלה על ידי",
-    "previousVersions": "גרסאות קודמות"
-  },
-  "equipment": {
-    "title": "ציוד מוקצה",
-    "assign": "הקצה ציוד",
-    "noEquipment": "לא הוקצה ציוד",
-    "name": "שם הפריט",
-    "description": "תיאור",
-    "serialNumber": "מספר סריאלי",
-    "assignedDate": "תאריך הקצאה",
-    "status": {
-      "assigned": "מוקצה",
-      "returned": "הוחזר",
-      "lost": "אבד"
-    }
-  },
-  "career": {
-    "addPosition": "הוסף תפקיד",
-    "noHistory": "אין היסטוריה מקצועית",
-    "positionTitle": "שם תפקיד",
-    "department": "מחלקה / חנות",
-    "startDate": "תאריך התחלה",
-    "endDate": "תאריך סיום",
-    "notes": "הערות"
-  },
-  "activity": {
-    "noActivity": "אין פעילות מתועדת",
-    "loadMore": "טען עוד",
-    "changedBy": "על ידי",
-    "worker_created": "פרופיל עובד נוצר",
-    "field_updated": "{{field}} שונה מ-«{{from}}» ל-«{{to}}»",
-    "status_changed": "הסטטוס שונה ל-{{status}}",
-    "document_uploaded": "מסמך הועלה: {{title}}",
-    "document_replaced": "מסמך עודכן: {{title}} (v{{version}})",
-    "equipment_assigned": "ציוד הוקצה: {{name}}",
-    "equipment_returned": "ציוד הוחזר: {{name}}"
-  },
-  "settings": {
-    "title": "הגדרות HR",
-    "departments": "מחלקות",
-    "stores": "חנויות",
-    "permissions": "הרשאות שדות",
-    "addDepartment": "הוסף מחלקה",
-    "departmentName": "שם המחלקה",
-    "addStore": "הוסף חנות",
-    "storeName": "שם החנות",
-    "savePermissions": "שמור הרשאות",
-    "fieldKey": "קבוצת שדה",
-    "canView": "צפייה",
-    "canEdit": "עריכה"
-  },
-  "common": {
-    "loading": "טוען…",
-    "error": "אירעה שגיאה. אנא נסה שוב.",
-    "save": "שמור",
-    "cancel": "ביטול",
-    "back": "חזור"
-  }
+  "tabs": { "personal": "פרטים אישיים", "employment": "תעסוקה", "salary": "שכר וקרנות", "documents": "מסמכים", "equipment": "ציוד", "career": "היסטוריה מקצועית", "activity": "יומן פעילות" },
+  "status": { "active": "פעיל", "inactive": "לא פעיל", "on_leave": "בחופשה", "terminated": "הסתיים" },
+  "workerType": { "office": "משרד", "store": "חנות", "courier": "שליח" },
+  "employmentType": { "permanent": "קבוע", "temporary": "זמני", "partial": "חלקי", "contractor": "קבלן" },
+  "vehicleType": { "bike": "אופניים", "motorcycle": "אופנוע", "car": "רכב" },
+  "maritalStatus": { "single": "רווק/ה", "married": "נשוי/אה", "divorced": "גרוש/ה", "separated": "פרוד/ה", "widowed": "אלמן/ה" },
+  "fields": { "firstName": "שם פרטי", "lastName": "שם משפחה", "phone": "טלפון", "email": "אימייל אישי", "workEmail": "אימייל עבודה", "idNumber": "ת.ז.", "dateOfBirth": "תאריך לידה", "address": "כתובת", "city": "עיר", "maritalStatus": "מצב משפחתי", "employeeNumber": "מספר עובד", "positionTitle": "תפקיד", "positionDesc": "תיאור תפקיד", "workerType": "סוג עובד", "employmentType": "סוג העסקה", "jobScope": "היקף משרה (%)", "vehicleType": "סוג רכב", "vehicleNumber": "מספר רכב", "leadSource": "מקור גיוס", "status": "סטטוס", "startDate": "תאריך התחלה", "endDate": "תאריך סיום", "grossSalary": "שכר ברוטו", "netSalary": "שכר נטו", "currency": "מטבע", "bankName": "בנק", "bankBranch": "סניף", "bankAccount": "מספר חשבון", "department": "מחלקה", "store": "חנות", "manager": "מנהל" },
+  "profile": { "editProfile": "עריכה", "saveAll": "שמור שינויים", "discard": "בטל", "delete": "מחק עובד", "deleteConfirm": "האם אתה בטוח שברצונך למחוק את העובד? לא ניתן לבטל פעולה זו.", "uploadPhoto": "התמונה עודכנה", "manager": "מנהל", "viewCandidate": "עבור למועמד המקורי", "recruitedVia": "גויס דרך {{source}}", "tenure": "{{years}} שנה {{months}} חודש", "tenureYears": "{{years}} שנה", "tenureMonths": "{{months}} חודש" },
+  "salary": { "banking": "פרטי בנק", "grossNet": "שכר ברוטו / נטו" },
+  "documents": { "contract": "חוזה עבודה", "form101": "טופס 101", "idCopy": "צילום ת.ז.", "nda": "הסכם סודיות", "certificates": "תעודות", "vehicleLicense": "רישיון רכב", "drivingLicense": "רישיון נהיגה", "other": "מסמכים נוספים", "uploadFile": "העלה", "uploading": "מעלה…", "noDocument": "לא הועלה מסמך", "uploadedBy": "הועלה על ידי", "previousVersions": "גרסאות קודמות" },
+  "equipment": { "title": "ציוד מוקצה", "assign": "הקצה ציוד", "noEquipment": "לא הוקצה ציוד", "name": "שם הפריט", "description": "תיאור", "serialNumber": "מספר סריאלי", "assignedDate": "תאריך הקצאה", "status": { "assigned": "מוקצה", "returned": "הוחזר", "lost": "אבד" } },
+  "career": { "addPosition": "הוסף תפקיד", "noHistory": "אין היסטוריה מקצועית", "positionTitle": "שם תפקיד", "department": "מחלקה / חנות", "startDate": "תאריך התחלה", "endDate": "תאריך סיום", "notes": "הערות" },
+  "activity": { "noActivity": "אין פעילות מתועדת", "loadMore": "טען עוד", "changedBy": "על ידי", "worker_created": "פרופיל עובד נוצר", "field_updated": "{{field}} שונה מ-«{{from}}» ל-«{{to}}»", "status_changed": "הסטטוס שונה ל-{{status}}", "document_uploaded": "מסמך הועלה: {{title}}", "document_replaced": "מסמך עודכן: {{title}} (v{{version}})", "equipment_assigned": "ציוד הוקצה: {{name}}", "equipment_returned": "ציוד הוחזר: {{name}}" },
+  "settings": { "title": "הגדרות HR", "departments": "מחלקות", "stores": "חנויות", "permissions": "הרשאות שדות", "addDepartment": "הוסף מחלקה", "departmentName": "שם המחלקה", "addStore": "הוסף חנות", "storeName": "שם החנות", "savePermissions": "שמור הרשאות", "fieldKey": "קבוצת שדה", "canView": "צפייה", "canEdit": "עריכה" },
+  "common": { "loading": "טוען…", "error": "אירעה שגיאה. אנא נסה שוב.", "save": "שמור", "cancel": "ביטול", "back": "חזור" }
 }

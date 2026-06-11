@@ -6,164 +6,19 @@
   "exportExcel": "Экспорт Excel",
   "noWorkers": "Сотрудники не найдены",
   "noWorkersDesc": "Попробуйте изменить фильтры или добавить нового сотрудника",
-  "tabs": {
-    "personal": "Личные данные",
-    "employment": "Занятость",
-    "salary": "Зарплата и фонды",
-    "documents": "Документы",
-    "equipment": "Оборудование",
-    "career": "История карьеры",
-    "activity": "Журнал активности"
-  },
-  "status": {
-    "active": "Активный",
-    "inactive": "Неактивный",
-    "on_leave": "В отпуске",
-    "terminated": "Уволен"
-  },
-  "workerType": {
-    "office": "Офис",
-    "store": "Магазин",
-    "courier": "Курьер"
-  },
-  "employmentType": {
-    "permanent": "Постоянный",
-    "temporary": "Временный",
-    "partial": "Частичная занятость",
-    "contractor": "Подрядчик"
-  },
-  "vehicleType": {
-    "bike": "Велосипед",
-    "motorcycle": "Мотоцикл",
-    "car": "Автомобиль"
-  },
-  "maritalStatus": {
-    "single": "Холост/не замужем",
-    "married": "Женат/замужем",
-    "divorced": "Разведён/разведена",
-    "separated": "Раздельно проживающий(ая)",
-    "widowed": "Вдовец/вдова"
-  },
-  "fields": {
-    "firstName": "Имя",
-    "lastName": "Фамилия",
-    "phone": "Телефон",
-    "email": "Личный email",
-    "workEmail": "Рабочий email",
-    "idNumber": "Номер удостоверения",
-    "dateOfBirth": "Дата рождения",
-    "address": "Адрес",
-    "city": "Город",
-    "maritalStatus": "Семейное положение",
-    "employeeNumber": "Табельный номер",
-    "positionTitle": "Должность",
-    "positionDesc": "Описание должности",
-    "workerType": "Тип сотрудника",
-    "employmentType": "Тип занятости",
-    "jobScope": "Ставка (%)",
-    "vehicleType": "Тип транспорта",
-    "vehicleNumber": "Номер транспорта",
-    "leadSource": "Источник найма",
-    "status": "Статус",
-    "startDate": "Дата начала",
-    "endDate": "Дата окончания",
-    "grossSalary": "Зарплата брутто",
-    "netSalary": "Зарплата нетто",
-    "currency": "Валюта",
-    "bankName": "Банк",
-    "bankBranch": "Отделение",
-    "bankAccount": "Номер счёта",
-    "department": "Отдел",
-    "store": "Магазин",
-    "manager": "Руководитель"
-  },
-  "profile": {
-    "editProfile": "Редактировать",
-    "saveAll": "Сохранить изменения",
-    "discard": "Отменить",
-    "delete": "Удалить сотрудника",
-    "deleteConfirm": "Вы уверены, что хотите удалить сотрудника? Это действие нельзя отменить.",
-    "uploadPhoto": "Фото обновлено",
-    "manager": "Руководитель",
-    "viewCandidate": "Перейти к кандидату",
-    "recruitedVia": "Нанят через {{source}}",
-    "tenure": "{{years}} л. {{months}} мес.",
-    "tenureYears": "{{years}} л.",
-    "tenureMonths": "{{months}} мес."
-  },
-  "salary": {
-    "banking": "Банковские реквизиты",
-    "grossNet": "Брутто / Нетто"
-  },
-  "documents": {
-    "contract": "Трудовой договор",
-    "form101": "Форма 101",
-    "idCopy": "Копия удостоверения",
-    "nda": "Соглашение о неразглашении",
-    "certificates": "Сертификаты",
-    "vehicleLicense": "Документы на транспорт",
-    "drivingLicense": "Водительское удостоверение",
-    "other": "Прочие документы",
-    "uploadFile": "Загрузить",
-    "uploading": "Загрузка…",
-    "noDocument": "Документ не загружен",
-    "uploadedBy": "Загрузил",
-    "previousVersions": "Предыдущие версии"
-  },
-  "equipment": {
-    "title": "Выданное оборудование",
-    "assign": "Выдать оборудование",
-    "noEquipment": "Оборудование не выдано",
-    "name": "Название",
-    "description": "Описание",
-    "serialNumber": "Серийный номер",
-    "assignedDate": "Дата выдачи",
-    "status": {
-      "assigned": "Выдано",
-      "returned": "Возвращено",
-      "lost": "Потеряно"
-    }
-  },
-  "career": {
-    "addPosition": "Добавить должность",
-    "noHistory": "История карьеры отсутствует",
-    "positionTitle": "Название должности",
-    "department": "Отдел / Магазин",
-    "startDate": "Дата начала",
-    "endDate": "Дата окончания",
-    "notes": "Примечания"
-  },
-  "activity": {
-    "noActivity": "Активность не зафиксирована",
-    "loadMore": "Загрузить ещё",
-    "changedBy": "Кем",
-    "worker_created": "Профиль сотрудника создан",
-    "field_updated": "Поле {{field}} изменено с «{{from}}» на «{{to}}»",
-    "status_changed": "Статус изменён на {{status}}",
-    "document_uploaded": "Документ загружен: {{title}}",
-    "document_replaced": "Документ обновлён: {{title}} (v{{version}})",
-    "equipment_assigned": "Выдано оборудование: {{name}}",
-    "equipment_returned": "Оборудование возвращено: {{name}}"
-  },
-  "settings": {
-    "title": "Настройки HR",
-    "departments": "Отделы",
-    "stores": "Магазины",
-    "permissions": "Разрешения полей",
-    "addDepartment": "Добавить отдел",
-    "departmentName": "Название отдела",
-    "addStore": "Добавить магазин",
-    "storeName": "Название магазина",
-    "savePermissions": "Сохранить разрешения",
-    "fieldKey": "Группа полей",
-    "canView": "Просмотр",
-    "canEdit": "Редактирование"
-  },
-  "common": {
-    "loading": "Загрузка…",
-    "error": "Произошла ошибка. Попробуйте ещё раз.",
-    "save": "Сохранить",
-    "cancel": "Отмена",
-    "back": "Назад"
-  }
+  "tabs": { "personal": "Личные данные", "employment": "Занятость", "salary": "Зарплата и фонды", "documents": "Документы", "equipment": "Оборудование", "career": "История карьеры", "activity": "Журнал активности" },
+  "status": { "active": "Активный", "inactive": "Неактивный", "on_leave": "В отпуске", "terminated": "Уволен" },
+  "workerType": { "office": "Офис", "store": "Магазин", "courier": "Курьер" },
+  "employmentType": { "permanent": "Постоянный", "temporary": "Временный", "partial": "Частичная занятость", "contractor": "Подрядчик" },
+  "vehicleType": { "bike": "Велосипед", "motorcycle": "Мотоцикл", "car": "Автомобиль" },
+  "maritalStatus": { "single": "Холост/не замужем", "married": "Женат/замужем", "divorced": "Разведён/разведена", "separated": "Раздельно проживающий(ая)", "widowed": "Вдовец/вдова" },
+  "fields": { "firstName": "Имя", "lastName": "Фамилия", "phone": "Телефон", "email": "Личный email", "workEmail": "Рабочий email", "idNumber": "Номер удостоверения", "dateOfBirth": "Дата рождения", "address": "Адрес", "city": "Город", "maritalStatus": "Семейное положение", "employeeNumber": "Табельный номер", "positionTitle": "Должность", "positionDesc": "Описание должности", "workerType": "Тип сотрудника", "employmentType": "Тип занятости", "jobScope": "Ставка (%)", "vehicleType": "Тип транспорта", "vehicleNumber": "Номер транспорта", "leadSource": "Источник найма", "status": "Статус", "startDate": "Дата начала", "endDate": "Дата окончания", "grossSalary": "Зарплата брутто", "netSalary": "Зарплата нетто", "currency": "Валюта", "bankName": "Банк", "bankBranch": "Отделение", "bankAccount": "Номер счёта", "department": "Отдел", "store": "Магазин", "manager": "Руководитель" },
+  "profile": { "editProfile": "Редактировать", "saveAll": "Сохранить изменения", "discard": "Отменить", "delete": "Удалить сотрудника", "deleteConfirm": "Вы уверены, что хотите удалить сотрудника? Это действие нельзя отменить.", "uploadPhoto": "Фото обновлено", "manager": "Руководитель", "viewCandidate": "Перейти к кандидату", "recruitedVia": "Нанят через {{source}}", "tenure": "{{years}} л. {{months}} мес.", "tenureYears": "{{years}} л.", "tenureMonths": "{{months}} мес." },
+  "salary": { "banking": "Банковские реквизиты", "grossNet": "Брутто / Нетто" },
+  "documents": { "contract": "Трудовой договор", "form101": "Форма 101", "idCopy": "Копия удостоверения", "nda": "Соглашение о неразглашении", "certificates": "Сертификаты", "vehicleLicense": "Документы на транспорт", "drivingLicense": "Водительское удостоверение", "other": "Прочие документы", "uploadFile": "Загрузить", "uploading": "Загрузка…", "noDocument": "Документ не загружен", "uploadedBy": "Загрузил", "previousVersions": "Предыдущие версии" },
+  "equipment": { "title": "Выданное оборудование", "assign": "Выдать оборудование", "noEquipment": "Оборудование не выдано", "name": "Название", "description": "Описание", "serialNumber": "Серийный номер", "assignedDate": "Дата выдачи", "status": { "assigned": "Выдано", "returned": "Возвращено", "lost": "Потеряно" } },
+  "career": { "addPosition": "Добавить должность", "noHistory": "История карьеры отсутствует", "positionTitle": "Название должности", "department": "Отдел / Магазин", "startDate": "Дата начала", "endDate": "Дата окончания", "notes": "Примечания" },
+  "activity": { "noActivity": "Активность не зафиксирована", "loadMore": "Загрузить ещё", "changedBy": "Кем", "worker_created": "Профиль сотрудника создан", "field_updated": "Поле {{field}} изменено с «{{from}}» на «{{to}}»", "status_changed": "Статус изменён на {{status}}", "document_uploaded": "Документ загружен: {{title}}", "document_replaced": "Документ обновлён: {{title}} (v{{version}})", "equipment_assigned": "Выдано оборудование: {{name}}", "equipment_returned": "Оборудование возвращено: {{name}}" },
+  "settings": { "title": "Настройки HR", "departments": "Отделы", "stores": "Магазины", "permissions": "Разрешения полей", "addDepartment": "Добавить отдел", "departmentName": "Название отдела", "addStore": "Добавить магазин", "storeName": "Название магазина", "savePermissions": "Сохранить разрешения", "fieldKey": "Группа полей", "canView": "Просмотр", "canEdit": "Редактирование" },
+  "common": { "loading": "Загрузка…", "error": "Произошла ошибка. Попробуйте ещё раз.", "save": "Сохранить", "cancel": "Отмена", "back": "Назад" }
 }
