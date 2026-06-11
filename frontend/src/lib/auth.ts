@@ -11,11 +11,12 @@ const adminEmails = (process.env.ADMIN_EMAILS ?? "")
   .map((e) => e.trim().toLowerCase())
   .filter(Boolean);
 
-// Local-only email login, enabled with ENABLE_DEV_LOGIN=true.
-// Lets you sign in by entering an email (no Azure AD). Never enable in production.
-export const devLoginEnabled =
-  process.env.ENABLE_DEV_LOGIN === "true" &&
-  process.env.NODE_ENV !== "production";
+// Email-only login (no Azure AD), enabled with ENABLE_DEV_LOGIN=true.
+// TEMPORARY: also honored in production so the CRM can be tested on a deployed
+// environment before real Azure AD SSO is wired up on the final domain.
+// SECURITY: anyone who knows the URL can sign in while this is on — keep it set
+// only on test deployments and remove ENABLE_DEV_LOGIN before going live.
+export const devLoginEnabled = process.env.ENABLE_DEV_LOGIN === "true";
 
 export const azureConfigured =
   !!process.env.AZURE_AD_CLIENT_ID &&
