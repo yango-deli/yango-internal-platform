@@ -37,6 +37,12 @@ const navItems = [
     icon: Users,
     roles: [Role.admin],
   },
+  {
+    label: "Admin",
+    href: "/admin",
+    icon: Users,
+    roles: [Role.admin],
+  },
 ];
 
 export function Sidebar() {
